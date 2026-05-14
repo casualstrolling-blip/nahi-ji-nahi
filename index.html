@@ -933,31 +933,36 @@ function resetForm() {
 
 // BUBBLE ANIMATION
 const allChars = [
-  { b1: 'boy-b1',      b2: 'boy-b2',      img: 'img-boy',      priority: true },
-  { b1: 'girl-b1',     b2: 'girl-b2',      img: 'img-girl',     priority: true },
-  { b1: 'mom-b1',      b2: 'mom-b2',       img: 'img-mom',      priority: false },
-  { b1: 'dad-b1',      b2: 'dad-b2',       img: 'img-dad',      priority: false },
-  { b1: 'bua-b1',      b2: 'bua-b2',       img: 'img-bua',      priority: false },
-  { b1: 'dadiji-b1',   b2: 'dadiji-b2',    img: 'img-dadiji',   priority: false },
-  { b1: 'girlsmom-b1', b2: 'girlsmom-b2',  img: 'img-girlsmom', priority: false },
-  { b1: 'girlsdad-b1', b2: 'girlsdad-b2',  img: 'img-girlsdad', priority: false },
+  { id: 'bua',      b1: 'bua-b1',      b2: 'bua-b2',      img: 'img-bua' },
+  { id: 'mom',      b1: 'mom-b1',      b2: 'mom-b2',       img: 'img-mom' },
+  { id: 'dad',      b1: 'dad-b1',      b2: 'dad-b2',       img: 'img-dad' },
+  { id: 'boy',      b1: 'boy-b1',      b2: 'boy-b2',       img: 'img-boy' },
+  { id: 'girl',     b1: 'girl-b1',     b2: 'girl-b2',      img: 'img-girl' },
+  { id: 'girlsmom', b1: 'girlsmom-b1', b2: 'girlsmom-b2',  img: 'img-girlsmom' },
+  { id: 'dadiji',   b1: 'dadiji-b1',   b2: 'dadiji-b2',    img: 'img-dadiji' },
+  { id: 'girlsdad', b1: 'girlsdad-b1', b2: 'girlsdad-b2',  img: 'img-girlsdad' },
 ];
 
-let charIdx = 0;
-let priorityPhase = true;
-const priorityList = allChars.filter(c => c.priority);
-const supportList = allChars.filter(c => !c.priority);
-let shuffled = [...supportList].sort(() => Math.random() - 0.5);
-let sequence = [...priorityList, ...shuffled];
+let activeChar = null;
+let bubbleTimer = null;
+let bubblePhase = 1;
+let isMobile = window.innerWidth <= 768;
 
-function showBubble(bubbleId) {
-  const el = document.getElementById(bubbleId);
+function showBubble(id) {
+  const el = document.getElementById(id);
   if (el) el.classList.add('visible');
 }
 
-function hideBubble(bubbleId) {
-  const el = document.getElementById(bubbleId);
+function hideBubble(id) {
+  const el = document.getElementById(id);
   if (el) el.classList.remove('visible');
+}
+
+function hideAllBubbles() {
+  allChars.forEach(c => {
+    hideBubble(c.b1);
+    hideBubble(c.b2);
+  });
 }
 
 function bounceImg(imgId) {
@@ -965,39 +970,98 @@ function bounceImg(imgId) {
   if (!el) return;
   el.style.transition = 'transform 0.18s ease';
   el.style.transform = 'translateY(-10px) scale(1.06)';
-  setTimeout(() => { el.style.transform = 'translateY(0) scale(1)'; }, 200);
+  setTimeout(() => { el.style.transform = 'translateY(0) scale(1)'; }, 220);
 }
 
-function nextChar() {
-  const char = sequence[charIdx % sequence.length];
-  charIdx++;
+function activateChar(char) {
+  if (activeChar && activeChar.id === char.id) return;
+  clearTimeout(bubbleTimer);
+  hideAllBubbles();
+  activeChar = char;
+  bubblePhase = 1;
+  runBubbleCycle(char);
+}
 
-  // Show bubble 1
+function runBubbleCycle(char) {
+  if (!activeChar || activeChar.id !== char.id) return;
+  
+  const dur = 2000 + Math.floor(Math.random() * 800);
+  
+  if (bubblePhase === 1) {
+    showBubble(char.b1);
+    bounceImg(char.img);
+    bubbleTimer = setTimeout(() => {
+      hideBubble(char.b1);
+      bubblePhase = 2;
+      bubbleTimer = setTimeout(() => runBubbleCycle(char), 200);
+    }, dur);
+  } else {
+    showBubble(char.b2);
+    bounceImg(char.img);
+    bubbleTimer = setTimeout(() => {
+      hideBubble(char.b2);
+      bubblePhase = 1;
+      bubbleTimer = setTimeout(() => runBubbleCycle(char), 200);
+    }, dur);
+  }
+}
+
+// Get most centered character in scroll view
+function getCenteredChar() {
+  const row = document.querySelector('.characters-row');
+  if (!row) return null;
+  const rowRect = row.getBoundingClientRect();
+  const centerX = rowRect.left + rowRect.width / 2;
+  
+  let closestChar = null;
+  let closestDist = Infinity;
+  
+  allChars.forEach(char => {
+    const img = document.getElementById(char.img);
+    if (!img) return;
+    const rect = img.getBoundingClientRect();
+    const imgCenter = rect.left + rect.width / 2;
+    const dist = Math.abs(imgCenter - centerX);
+    if (dist < closestDist) {
+      closestDist = dist;
+      closestChar = char;
+    }
+  });
+  return closestChar;
+}
+
+// Desktop - random sequence like before
+let desktopIdx = 0;
+const desktopSequence = [...allChars].sort(() => Math.random() - 0.5);
+
+function desktopLoop() {
+  const char = desktopSequence[desktopIdx % desktopSequence.length];
+  desktopIdx++;
+  hideAllBubbles();
+  activeChar = char;
+  bubblePhase = 1;
+
   showBubble(char.b1);
   bounceImg(char.img);
-
-  // After 2s hide b1 show b2
+  const dur1 = 2000 + Math.floor(Math.random() * 800);
   setTimeout(() => {
     hideBubble(char.b1);
     setTimeout(() => {
       showBubble(char.b2);
       bounceImg(char.img);
-      // After 2s hide b2 next char
+      const dur2 = 2000 + Math.floor(Math.random() * 800);
       setTimeout(() => {
         hideBubble(char.b2);
-        // Random gap 200-600ms
-        const gap = 200 + Math.floor(Math.random() * 400);
-        setTimeout(nextChar, gap);
-      }, 1800 + Math.floor(Math.random() * 800));
+        setTimeout(desktopLoop, 200 + Math.floor(Math.random() * 300));
+      }, dur2);
     }, 150);
-  }, 1800 + Math.floor(Math.random() * 800));
+  }, dur1);
 }
 
-// Start after page loads
 window.addEventListener('load', () => {
-  setTimeout(nextChar, 800);
+  isMobile = window.innerWidth <= 768;
 
-  // Center the characters row on mobile so boy and girl are visible
+  // Center scroll on mobile
   const row = document.querySelector('.characters-row');
   if (row) {
     setTimeout(() => {
@@ -1006,9 +1070,35 @@ window.addEventListener('load', () => {
         const dividerLeft = divider.offsetLeft;
         const rowWidth = row.clientWidth;
         row.scrollLeft = dividerLeft - (rowWidth / 2);
+        // Activate centered char after scroll settles
+        setTimeout(() => {
+          const centered = getCenteredChar();
+          if (centered) activateChar(centered);
+        }, 200);
       }
     }, 100);
+
+    // On mobile scroll - activate the centered character
+    let scrollTimeout;
+    row.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        if (window.innerWidth <= 768) {
+          const centered = getCenteredChar();
+          if (centered) activateChar(centered);
+        }
+      }, 150);
+    });
   }
+
+  // Desktop - start random loop
+  if (window.innerWidth > 768) {
+    setTimeout(desktopLoop, 800);
+  }
+});
+
+window.addEventListener('resize', () => {
+  isMobile = window.innerWidth <= 768;
 });
 </script>
 

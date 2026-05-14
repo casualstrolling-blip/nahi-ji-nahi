@@ -163,29 +163,34 @@
 
   .bubble-wrap {
     position: relative;
-    height: 52px;
+    height: 64px;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
+    margin-bottom: 4px;
   }
 
   .bubble {
     background: white;
     border: 1.5px solid var(--gold);
-    border-radius: 12px;
-    padding: 5px 9px;
-    font-size: 9.5px;
+    border-radius: 10px;
+    padding: 6px 10px;
+    font-size: 9px;
     font-family: 'Hind', sans-serif;
     font-weight: 500;
     color: var(--dark);
     text-align: center;
-    max-width: 95px;
-    line-height: 1.3;
+    max-width: 110px;
+    min-width: 70px;
+    line-height: 1.4;
     position: absolute;
+    bottom: 8px;
     opacity: 0;
-    transition: opacity 0.5s ease;
-    white-space: nowrap;
-    box-shadow: 0 2px 8px rgba(139,26,58,0.08);
+    transition: opacity 0.4s ease;
+    white-space: normal;
+    word-wrap: break-word;
+    box-shadow: 0 2px 10px rgba(139,26,58,0.12);
+    z-index: 10;
   }
 
   .bubble::after {
@@ -194,8 +199,7 @@
     bottom: -7px;
     left: 50%;
     transform: translateX(-50%);
-    width: 0;
-    height: 0;
+    width: 0; height: 0;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     border-top: 7px solid var(--gold);
@@ -207,8 +211,7 @@
     bottom: -5px;
     left: 50%;
     transform: translateX(-50%);
-    width: 0;
-    height: 0;
+    width: 0; height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     border-top: 6px solid white;
@@ -219,12 +222,16 @@
 
   /* SVG CHARACTERS */
   .char-svg {
-    width: 52px;
-    height: 80px;
+    width: 64px;
+    height: 96px;
+  }
+
+  .char-container {
+    position: relative;
   }
 
   .char-name {
-    font-size: 8.5px;
+    font-size: 9px;
     color: var(--muted);
     text-align: center;
     font-weight: 500;
@@ -555,7 +562,6 @@
   <div class="scene">
     <span class="scene-label left">Boy's Side</span>
     <span class="scene-label right">Girl's Side</span>
-
     <div class="characters-row">
 
       <!-- BOY'S SIDE -->
@@ -563,136 +569,185 @@
 
         <!-- MOM -->
         <div class="character" id="char-mom">
-          <div class="bubble-wrap">
-            <div class="bubble" id="mom-b1">Mera beta bahut independent hai</div>
-            <div class="bubble" id="mom-b2">Uska dabba maine pack kiya aaj bhi</div>
+          <div class="bubble-wrap"><div class="bubble" id="mom-b1">Mera beta bahut independent hai</div><div class="bubble" id="mom-b2">Uska dabba maine pack kiya aaj bhi</div></div>
+          <div class="char-container">
+            <svg class="char-svg" id="svg-mom" viewBox="0 0 70 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Body - saree -->
+              <ellipse cx="35" cy="82" rx="18" ry="24" fill="#C94070"/>
+              <ellipse cx="35" cy="82" rx="18" ry="24" fill="#8B1A3A" opacity="0.15"/>
+              <rect x="17" y="98" width="36" height="4" rx="2" fill="#D4A017"/>
+              <!-- Blouse -->
+              <rect x="23" y="58" width="24" height="20" rx="4" fill="#E8A020"/>
+              <!-- Head group with animation -->
+              <g id="mom-head" style="transform-origin: 35px 45px;">
+                <ellipse cx="35" cy="44" rx="13" ry="14" fill="#C8845A"/>
+                <!-- Hair bun -->
+                <ellipse cx="35" cy="28" rx="9" ry="6" fill="#1A0E08"/>
+                <circle cx="35" cy="24" r="5" fill="#1A0E08"/>
+                <!-- Bindi -->
+                <circle cx="35" cy="38" r="2" fill="#C94070"/>
+                <!-- Expression state 1 - proud smile -->
+                <g id="mom-expr1">
+                  <ellipse cx="29" cy="43" rx="2" ry="2.2" fill="#1A0E08"/>
+                  <ellipse cx="41" cy="43" rx="2" ry="2.2" fill="#1A0E08"/>
+                  <path d="M28 50 Q35 54 42 50" stroke="#1A0E08" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                  <!-- Eyebrows - raised proudly -->
+                  <path d="M26 39 Q29 37 32 39" stroke="#1A0E08" stroke-width="1.2" fill="none"/>
+                  <path d="M38 39 Q41 37 44 39" stroke="#1A0E08" stroke-width="1.2" fill="none"/>
+                </g>
+                <!-- Expression state 2 - knowing smirk -->
+                <g id="mom-expr2" style="display:none">
+                  <ellipse cx="29" cy="43" rx="2" ry="1.5" fill="#1A0E08"/>
+                  <ellipse cx="41" cy="43" rx="2" ry="1.5" fill="#1A0E08"/>
+                  <path d="M29 50 Q33 52 42 49" stroke="#1A0E08" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                  <!-- One eyebrow raised -->
+                  <path d="M26 38 Q29 35 32 38" stroke="#1A0E08" stroke-width="1.2" fill="none"/>
+                  <path d="M38 40 Q41 39 44 40" stroke="#1A0E08" stroke-width="1.2" fill="none"/>
+                </g>
+              </g>
+              <!-- Chai cup -->
+              <rect x="50" y="68" width="13" height="10" rx="2" fill="#F5C842"/>
+              <path d="M63 71 Q67 71 67 76 Q67 81 63 81" stroke="#D4A017" stroke-width="2" fill="none"/>
+              <!-- Arms -->
+              <path d="M23 65 L14 76" stroke="#C8845A" stroke-width="5" stroke-linecap="round"/>
+              <path d="M47 65 L54 70" stroke="#C8845A" stroke-width="5" stroke-linecap="round"/>
+            </svg>
           </div>
-          <svg class="char-svg" viewBox="0 0 52 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Body -->
-            <ellipse cx="26" cy="58" rx="14" ry="18" fill="#C94070"/>
-            <!-- Saree drape suggestion -->
-            <ellipse cx="26" cy="58" rx="14" ry="18" fill="#8B1A3A" opacity="0.2"/>
-            <!-- Gold border -->
-            <rect x="12" y="72" width="28" height="3" rx="1.5" fill="#D4A017"/>
-            <!-- Torso -->
-            <rect x="18" y="42" width="16" height="16" rx="3" fill="#E8A020"/>
-            <!-- Head -->
-            <ellipse cx="26" cy="32" rx="10" ry="11" fill="#D4845A"/>
-            <!-- Hair bun -->
-            <ellipse cx="26" cy="20" rx="7" ry="5" fill="#2C1810"/>
-            <circle cx="26" cy="17" r="4" fill="#2C1810"/>
-            <!-- Bindi -->
-            <circle cx="26" cy="27" r="1.5" fill="#C94070"/>
-            <!-- Eyes -->
-            <ellipse cx="22" cy="31" rx="1.5" ry="1.5" fill="#2C1810"/>
-            <ellipse cx="30" cy="31" rx="1.5" ry="1.5" fill="#2C1810"/>
-            <!-- Smile - authoritative -->
-            <path d="M22 36 Q26 38 30 36" stroke="#2C1810" stroke-width="1" fill="none"/>
-            <!-- Chai cup -->
-            <rect x="36" y="50" width="10" height="8" rx="2" fill="#F5C842"/>
-            <path d="M46 53 Q50 53 50 57 Q50 61 46 61" stroke="#D4A017" stroke-width="1.5" fill="none"/>
-            <!-- Arms -->
-            <path d="M18 48 L12 55" stroke="#D4845A" stroke-width="4" stroke-linecap="round"/>
-            <path d="M34 48 L38 52" stroke="#D4845A" stroke-width="4" stroke-linecap="round"/>
-          </svg>
           <span class="char-name">Mom</span>
         </div>
 
         <!-- DAD -->
         <div class="character" id="char-dad">
-          <div class="bubble-wrap">
-            <div class="bubble" id="dad-b1">Beta ki khushi mein humari khushi</div>
-            <div class="bubble" id="dad-b2">Bas nipat jaaye ek baar</div>
+          <div class="bubble-wrap"><div class="bubble" id="dad-b1">Beta ki khushi mein humari khushi</div><div class="bubble" id="dad-b2">Bas nipat jaaye ek baar</div></div>
+          <div class="char-container">
+            <svg class="char-svg" id="svg-dad" viewBox="0 0 70 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Kurta -->
+              <rect x="18" y="56" width="34" height="48" rx="5" fill="#E8A020"/>
+              <path d="M29 56 L35 64 L41 56" fill="#FDF6EC"/>
+              <!-- Pyjama -->
+              <rect x="20" y="84" width="12" height="20" rx="4" fill="#FDF6EC"/>
+              <rect x="38" y="84" width="12" height="20" rx="4" fill="#FDF6EC"/>
+              <g id="dad-head" style="transform-origin: 35px 44px;">
+                <ellipse cx="35" cy="44" rx="13" ry="14" fill="#B87040"/>
+                <!-- Thinning hair -->
+                <path d="M22 36 Q26 28 35 28 Q44 28 48 36" fill="#1A0E08"/>
+                <!-- Moustache -->
+                <path d="M28 50 Q35 53 42 50" stroke="#1A0E08" stroke-width="2" fill="none"/>
+                <!-- Expression 1 - polite nod, eyes open -->
+                <g id="dad-expr1">
+                  <ellipse cx="29" cy="43" rx="2" ry="2" fill="#1A0E08"/>
+                  <ellipse cx="41" cy="43" rx="2" ry="2" fill="#1A0E08"/>
+                  <path d="M30 52 Q35 53 40 52" stroke="#1A0E08" stroke-width="1.2" fill="none"/>
+                  <path d="M26 38 Q29 37 32 38" stroke="#1A0E08" stroke-width="1" fill="none"/>
+                  <path d="M38 38 Q41 37 44 38" stroke="#1A0E08" stroke-width="1" fill="none"/>
+                </g>
+                <!-- Expression 2 - eyes half closed, checked out -->
+                <g id="dad-expr2" style="display:none">
+                  <ellipse cx="29" cy="44" rx="2" ry="1" fill="#1A0E08"/>
+                  <ellipse cx="41" cy="44" rx="2" ry="1" fill="#1A0E08"/>
+                  <!-- Heavy eyelids -->
+                  <path d="M27 43 Q29 42 31 43" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
+                  <path d="M39 43 Q41 42 43 43" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
+                  <path d="M30 52 Q35 51 40 52" stroke="#1A0E08" stroke-width="1.2" fill="none"/>
+                </g>
+              </g>
+              <!-- Arms slightly away -->
+              <path d="M18 64 L10 78" stroke="#B87040" stroke-width="5" stroke-linecap="round"/>
+              <path d="M52 64 L58 72" stroke="#B87040" stroke-width="5" stroke-linecap="round"/>
+            </svg>
           </div>
-          <svg class="char-svg" viewBox="0 0 52 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Kurta -->
-            <rect x="14" y="40" width="24" height="36" rx="4" fill="#E8A020"/>
-            <!-- Collar -->
-            <path d="M22 40 L26 46 L30 40" fill="#FDF6EC"/>
-            <!-- Head -->
-            <ellipse cx="26" cy="30" rx="10" ry="11" fill="#C4845A"/>
-            <!-- Hair - thinning -->
-            <path d="M16 24 Q20 19 26 19 Q32 19 36 24" fill="#2C1810"/>
-            <!-- Moustache -->
-            <path d="M21 33 Q26 35 31 33" stroke="#2C1810" stroke-width="1.5" fill="none"/>
-            <!-- Eyes - half closed -->
-            <ellipse cx="22" cy="29" rx="1.5" ry="1" fill="#2C1810"/>
-            <ellipse cx="30" cy="29" rx="1.5" ry="1" fill="#2C1810"/>
-            <!-- Neutral expression -->
-            <path d="M23 35 Q26 35.5 29 35" stroke="#2C1810" stroke-width="1" fill="none"/>
-            <!-- Arms slightly away from body -->
-            <path d="M14 46 L8 58" stroke="#C4845A" stroke-width="4" stroke-linecap="round"/>
-            <path d="M38 46 L42 52" stroke="#C4845A" stroke-width="4" stroke-linecap="round"/>
-            <!-- Pyjama -->
-            <rect x="16" y="60" width="8" height="18" rx="3" fill="#FDF6EC"/>
-            <rect x="28" y="60" width="8" height="18" rx="3" fill="#FDF6EC"/>
-          </svg>
           <span class="char-name">Dad</span>
         </div>
 
-        <!-- BOY -->
+        <!-- THE BOY -->
         <div class="character" id="char-boy">
-          <div class="bubble-wrap">
-            <div class="bubble" id="boy-b1">Pehli baar dekh raha hoon aaj</div>
-            <div class="bubble" id="boy-b2">Insta pe 2 ghante stalk kiya tha kal raat</div>
+          <div class="bubble-wrap"><div class="bubble" id="boy-b1">Pehli baar dekh raha hoon aaj</div><div class="bubble" id="boy-b2">Insta pe 2 ghante stalk kiya tha kal raat</div></div>
+          <div class="char-container">
+            <svg class="char-svg" id="svg-boy" viewBox="0 0 70 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Trousers -->
+              <rect x="20" y="78" width="13" height="28" rx="4" fill="#2C1810"/>
+              <rect x="37" y="78" width="13" height="28" rx="4" fill="#2C1810"/>
+              <!-- Shirt -->
+              <rect x="16" y="54" width="38" height="28" rx="5" fill="#A8C4E0"/>
+              <path d="M28 54 L35 61 L42 54" fill="white"/>
+              <circle cx="35" cy="67" r="1.5" fill="#8BA8C4"/>
+              <circle cx="35" cy="73" r="1.5" fill="#8BA8C4"/>
+              <g id="boy-head" style="transform-origin: 35px 43px;">
+                <ellipse cx="35" cy="43" rx="13" ry="14" fill="#C8845A"/>
+                <!-- Hair - suspiciously neat -->
+                <path d="M22 35 Q35 26 48 35" fill="#1A0E08"/>
+                <path d="M22 35 Q20 30 22 27" fill="#1A0E08"/>
+                <!-- Expression 1 - innocent smile -->
+                <g id="boy-expr1">
+                  <ellipse cx="29" cy="42" rx="2" ry="2.2" fill="#1A0E08"/>
+                  <ellipse cx="41" cy="42" rx="2" ry="2.2" fill="#1A0E08"/>
+                  <path d="M28 50 Q35 55 42 50" stroke="#1A0E08" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                  <path d="M26 37 Q29 36 32 37" stroke="#1A0E08" stroke-width="1" fill="none"/>
+                  <path d="M38 37 Q41 36 44 37" stroke="#1A0E08" stroke-width="1" fill="none"/>
+                </g>
+                <!-- Expression 2 - guilty side eye -->
+                <g id="boy-expr2" style="display:none">
+                  <!-- Eyes looking sideways -->
+                  <ellipse cx="30" cy="42" rx="2" ry="2.2" fill="#1A0E08"/>
+                  <ellipse cx="42" cy="42" rx="2" ry="2.2" fill="#1A0E08"/>
+                  <!-- Nervous sweat drop -->
+                  <ellipse cx="47" cy="36" rx="1.5" ry="2" fill="#A8C4E0" opacity="0.8"/>
+                  <!-- Awkward smile -->
+                  <path d="M29 50 Q35 53 41 50" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
+                  <path d="M26 38 Q29 37 32 38" stroke="#1A0E08" stroke-width="1" fill="none"/>
+                  <path d="M38 37 Q41 35 44 37" stroke="#1A0E08" stroke-width="1.2" fill="none"/>
+                </g>
+              </g>
+              <!-- Phone hidden behind back -->
+              <rect x="52" y="64" width="9" height="14" rx="2" fill="#444" opacity="0.7"/>
+              <rect x="53" y="65" width="7" height="10" rx="1" fill="#88BBDD" opacity="0.7"/>
+              <!-- Arms -->
+              <path d="M16 62 L8 74" stroke="#C8845A" stroke-width="5" stroke-linecap="round"/>
+              <path d="M54 62 L58 68" stroke="#C8845A" stroke-width="5" stroke-linecap="round"/>
+            </svg>
           </div>
-          <svg class="char-svg" viewBox="0 0 52 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Trousers -->
-            <rect x="16" y="56" width="8" height="22" rx="3" fill="#2C1810"/>
-            <rect x="28" y="56" width="8" height="22" rx="3" fill="#2C1810"/>
-            <!-- Shirt - light blue -->
-            <rect x="13" y="38" width="26" height="22" rx="4" fill="#A8C4E0"/>
-            <!-- Collar -->
-            <path d="M21 38 L26 43 L31 38" fill="white"/>
-            <!-- Buttons -->
-            <circle cx="26" cy="47" r="1" fill="#8BA8C4"/>
-            <circle cx="26" cy="52" r="1" fill="#8BA8C4"/>
-            <!-- Head -->
-            <ellipse cx="26" cy="28" rx="10" ry="11" fill="#C4845A"/>
-            <!-- Hair - suspiciously combed -->
-            <path d="M16 22 Q26 16 36 22" fill="#2C1810"/>
-            <!-- Eyes - nervous -->
-            <ellipse cx="22" cy="28" rx="1.5" ry="1.5" fill="#2C1810"/>
-            <ellipse cx="30" cy="28" rx="1.5" ry="1.5" fill="#2C1810"/>
-            <!-- Nervous smile -->
-            <path d="M22 33 Q26 36 30 33" stroke="#2C1810" stroke-width="1" fill="none"/>
-            <!-- Phone hidden behind back -->
-            <rect x="38" y="48" width="7" height="11" rx="2" fill="#555" opacity="0.6"/>
-            <!-- Arms -->
-            <path d="M13 44 L7 54" stroke="#C4845A" stroke-width="4" stroke-linecap="round"/>
-            <path d="M39 44 L42 50" stroke="#C4845A" stroke-width="4" stroke-linecap="round"/>
-          </svg>
           <span class="char-name">The Boy</span>
         </div>
 
         <!-- BUA -->
         <div class="character" id="char-bua">
-          <div class="bubble-wrap">
-            <div class="bubble" id="bua-b1">Haan dekhte hain</div>
-            <div class="bubble" id="bua-b2">Mujhe toh pehle din se pata tha — nahi hoga</div>
+          <div class="bubble-wrap"><div class="bubble" id="bua-b1">Haan dekhte hain</div><div class="bubble" id="bua-b2">Mujhe toh pehle din se pata tha — nahi hoga</div></div>
+          <div class="char-container">
+            <svg class="char-svg" id="svg-bua" viewBox="0 0 70 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Saree turmeric -->
+              <ellipse cx="35" cy="82" rx="17" ry="23" fill="#E8A020"/>
+              <rect x="18" y="97" width="34" height="4" rx="2" fill="#8B1A3A"/>
+              <!-- Arms crossed firmly -->
+              <path d="M18 68 Q28 63 35 65 Q42 63 52 68" stroke="#C8845A" stroke-width="6" stroke-linecap="round" fill="none"/>
+              <!-- Chai cup balanced -->
+              <rect x="27" y="60" width="10" height="8" rx="2" fill="#F5C842"/>
+              <g id="bua-head" style="transform-origin: 35px 43px;">
+                <ellipse cx="35" cy="43" rx="12" ry="13" fill="#B87040"/>
+                <!-- Grey bun -->
+                <ellipse cx="35" cy="28" rx="10" ry="6" fill="#888"/>
+                <circle cx="35" cy="24" r="5" fill="#888"/>
+                <!-- Expression 1 - neutral waiting -->
+                <g id="bua-expr1">
+                  <ellipse cx="29" cy="42" rx="2" ry="2" fill="#1A0E08"/>
+                  <ellipse cx="41" cy="42" rx="2" ry="2" fill="#1A0E08"/>
+                  <!-- Thin line mouth - neutral -->
+                  <path d="M29 50 Q35 50 41 50" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
+                  <path d="M26 37 Q29 36 32 37" stroke="#1A0E08" stroke-width="1" fill="none"/>
+                  <path d="M38 37 Q41 36 44 37" stroke="#1A0E08" stroke-width="1" fill="none"/>
+                </g>
+                <!-- Expression 2 - one eyebrow raised, disapproving -->
+                <g id="bua-expr2" style="display:none">
+                  <ellipse cx="29" cy="43" rx="2" ry="1.5" fill="#1A0E08"/>
+                  <ellipse cx="41" cy="42" rx="2" ry="2" fill="#1A0E08"/>
+                  <!-- One eyebrow WAY up -->
+                  <path d="M26 38 Q29 36 32 38" stroke="#1A0E08" stroke-width="1" fill="none"/>
+                  <path d="M38 35 Q41 32 44 35" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
+                  <!-- Disapproving thin mouth -->
+                  <path d="M30 51 Q35 49 40 51" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
+                </g>
+              </g>
+            </svg>
           </div>
-          <svg class="char-svg" viewBox="0 0 52 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Saree - turmeric -->
-            <ellipse cx="26" cy="60" rx="13" ry="17" fill="#E8A020"/>
-            <rect x="13" y="70" width="26" height="3" rx="1.5" fill="#8B1A3A"/>
-            <!-- Arms crossed -->
-            <path d="M13 50 Q20 46 26 48 Q32 46 39 50" stroke="#C4845A" stroke-width="5" stroke-linecap="round" fill="none"/>
-            <!-- Chai cup on crossed arms -->
-            <rect x="20" y="44" width="8" height="6" rx="1.5" fill="#F5C842"/>
-            <!-- Head -->
-            <ellipse cx="26" cy="30" rx="10" ry="11" fill="#C4845A"/>
-            <!-- Hair bun - older -->
-            <ellipse cx="26" cy="19" rx="8" ry="5" fill="#888"/>
-            <circle cx="26" cy="16" r="4" fill="#888"/>
-            <!-- One eyebrow raised HIGH -->
-            <path d="M19 24 Q22 21 25 23" stroke="#2C1810" stroke-width="1.5" fill="none"/>
-            <path d="M27 26 Q30 25 33 26" stroke="#2C1810" stroke-width="1" fill="none"/>
-            <!-- Eyes - judging -->
-            <ellipse cx="22" cy="28" rx="1.5" ry="1.2" fill="#2C1810"/>
-            <ellipse cx="30" cy="28" rx="1.5" ry="1.5" fill="#2C1810"/>
-            <!-- Thin disapproving line for mouth -->
-            <path d="M22 34 Q26 33 30 34" stroke="#2C1810" stroke-width="1" fill="none"/>
-          </svg>
           <span class="char-name">Bua</span>
         </div>
 
@@ -705,191 +760,245 @@
 
         <!-- DADIJI -->
         <div class="character" id="char-dadiji">
-          <div class="bubble-wrap">
-            <div class="bubble" id="dadiji-b1">Ladki bahut achhi lagi humein</div>
-            <div class="bubble" id="dadiji-b2">Rang thoda aur saaf hota toh...</div>
+          <div class="bubble-wrap"><div class="bubble" id="dadiji-b1">Ladki bahut achhi lagi humein</div><div class="bubble" id="dadiji-b2">Rang thoda aur saaf hota toh...</div></div>
+          <div class="char-container">
+            <svg class="char-svg" id="svg-dadiji" viewBox="0 0 70 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Tiny ivory saree -->
+              <ellipse cx="35" cy="84" rx="14" ry="20" fill="#FAF0E0"/>
+              <rect x="21" y="97" width="28" height="4" rx="2" fill="#E8A020"/>
+              <g id="dadiji-head" style="transform-origin: 35px 46px;">
+                <ellipse cx="35" cy="46" rx="11" ry="12" fill="#B87040"/>
+                <!-- Enormous white bun -->
+                <circle cx="35" cy="30" r="10" fill="white" stroke="#DDD" stroke-width="1"/>
+                <ellipse cx="35" cy="25" rx="8" ry="5" fill="white"/>
+                <!-- Thick round glasses -->
+                <circle cx="28" cy="46" r="5" fill="none" stroke="#8B1A3A" stroke-width="1.8"/>
+                <circle cx="42" cy="46" r="5" fill="none" stroke="#8B1A3A" stroke-width="1.8"/>
+                <path d="M33 46 L37 46" stroke="#8B1A3A" stroke-width="1.8"/>
+                <path d="M23 46 L20 44" stroke="#8B1A3A" stroke-width="1.8"/>
+                <path d="M47 46 L50 44" stroke="#8B1A3A" stroke-width="1.8"/>
+                <!-- Expression 1 - sweet smile -->
+                <g id="dadiji-expr1">
+                  <ellipse cx="28" cy="46" rx="1.5" ry="1.5" fill="#1A0E08"/>
+                  <ellipse cx="42" cy="46" rx="1.5" ry="1.5" fill="#1A0E08"/>
+                  <path d="M29 54 Q35 57 41 54" stroke="#1A0E08" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                </g>
+                <!-- Expression 2 - sharp judging look -->
+                <g id="dadiji-expr2" style="display:none">
+                  <ellipse cx="28" cy="47" rx="1.5" ry="1.2" fill="#1A0E08"/>
+                  <ellipse cx="42" cy="47" rx="1.5" ry="1.2" fill="#1A0E08"/>
+                  <!-- Squinting -->
+                  <path d="M25 45 Q28 44 31 45" stroke="#1A0E08" stroke-width="1" fill="none"/>
+                  <path d="M39 45 Q42 44 45 45" stroke="#1A0E08" stroke-width="1" fill="none"/>
+                  <path d="M30 54 Q35 52 40 54" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
+                </g>
+              </g>
+              <!-- Hands on walking stick -->
+              <path d="M26 72 Q35 68 44 72" stroke="#C8845A" stroke-width="4" stroke-linecap="round" fill="none"/>
+              <!-- Walking stick with flower -->
+              <path d="M48 62 L50 106" stroke="#8B6914" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="49" cy="62" r="4" fill="#C94070"/>
+              <circle cx="47" cy="58" r="2" fill="#E8A020"/>
+              <circle cx="51" cy="58" r="2" fill="#E8A020"/>
+            </svg>
           </div>
-          <svg class="char-svg" viewBox="0 0 52 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Cotton saree - ivory -->
-            <ellipse cx="26" cy="62" rx="11" ry="15" fill="#FAF0E0"/>
-            <rect x="15" y="72" width="22" height="3" rx="1.5" fill="#E8A020"/>
-            <!-- Small frame -->
-            <!-- Head - smaller -->
-            <ellipse cx="26" cy="33" rx="9" ry="10" fill="#C4845A"/>
-            <!-- Enormous white bun -->
-            <circle cx="26" cy="21" r="8" fill="white" stroke="#ddd" stroke-width="1"/>
-            <ellipse cx="26" cy="17" rx="6" ry="4" fill="white"/>
-            <!-- Thick round glasses -->
-            <circle cx="21" cy="33" r="4" fill="none" stroke="#8B1A3A" stroke-width="1.5"/>
-            <circle cx="31" cy="33" r="4" fill="none" stroke="#8B1A3A" stroke-width="1.5"/>
-            <path d="M25 33 L27 33" stroke="#8B1A3A" stroke-width="1.5"/>
-            <path d="M17 33 L15 32" stroke="#8B1A3A" stroke-width="1.5"/>
-            <path d="M35 33 L37 32" stroke="#8B1A3A" stroke-width="1.5"/>
-            <!-- Eyes -->
-            <ellipse cx="21" cy="33" rx="1.5" ry="1.5" fill="#2C1810"/>
-            <ellipse cx="31" cy="33" rx="1.5" ry="1.5" fill="#2C1810"/>
-            <!-- Mouth - thin decisive line -->
-            <path d="M22 39 Q26 40 30 39" stroke="#2C1810" stroke-width="1" fill="none"/>
-            <!-- Hands folded in lap -->
-            <path d="M19 56 Q26 53 33 56" stroke="#C4845A" stroke-width="4" stroke-linecap="round" fill="none"/>
-            <!-- Walking stick -->
-            <path d="M36 48 L38 78" stroke="#8B6914" stroke-width="2.5" stroke-linecap="round"/>
-            <circle cx="37" cy="48" r="3" fill="#C94070"/>
-          </svg>
           <span class="char-name">Dadiji</span>
         </div>
 
         <!-- CHACHA -->
         <div class="character" id="char-chacha">
-          <div class="bubble-wrap">
-            <div class="bubble" id="chacha-b1">Bas bhanji theek rahe</div>
-            <div class="bubble" id="chacha-b2">Package kitna hai beta — exact figure</div>
+          <div class="bubble-wrap"><div class="bubble" id="chacha-b1">Bas bhanji theek rahe</div><div class="bubble" id="chacha-b2">Package kitna hai beta — exact figure</div></div>
+          <div class="char-container">
+            <svg class="char-svg" id="svg-chacha" viewBox="0 0 70 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Rotund body -->
+              <ellipse cx="35" cy="80" rx="22" ry="26" fill="#E8A020"/>
+              <!-- Shirt buttons straining -->
+              <circle cx="35" cy="68" r="1.5" fill="#C47A15"/>
+              <circle cx="35" cy="75" r="1.5" fill="#C47A15"/>
+              <circle cx="35" cy="82" r="1.5" fill="#C47A15"/>
+              <g id="chacha-head" style="transform-origin: 35px 42px;">
+                <ellipse cx="35" cy="42" rx="14" ry="14" fill="#C8845A"/>
+                <!-- Magnificent moustache -->
+                <path d="M23 50 Q29 54 35 51 Q41 54 47 50" fill="#1A0E08"/>
+                <!-- Expression 1 - fake warmth -->
+                <g id="chacha-expr1">
+                  <ellipse cx="28" cy="40" rx="2.5" ry="2" fill="#1A0E08"/>
+                  <ellipse cx="42" cy="40" rx="2.5" ry="2" fill="#1A0E08"/>
+                  <path d="M27 47 Q35 51 43 47" stroke="#1A0E08" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                  <path d="M24 34 Q28 32 32 34" stroke="#1A0E08" stroke-width="1.2" fill="none"/>
+                  <path d="M38 34 Q42 32 46 34" stroke="#1A0E08" stroke-width="1.2" fill="none"/>
+                </g>
+                <!-- Expression 2 - aggressive interrogation -->
+                <g id="chacha-expr2" style="display:none">
+                  <ellipse cx="28" cy="40" rx="2.5" ry="2.5" fill="#1A0E08"/>
+                  <ellipse cx="42" cy="40" rx="2.5" ry="2.5" fill="#1A0E08"/>
+                  <!-- Furrowed brows -->
+                  <path d="M24 33 Q28 30 32 33" stroke="#1A0E08" stroke-width="1.8" fill="none"/>
+                  <path d="M38 33 Q42 30 46 33" stroke="#1A0E08" stroke-width="1.8" fill="none"/>
+                  <path d="M28 47 Q35 46 42 47" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
+                </g>
+              </g>
+              <!-- Pointing finger aggressive -->
+              <path d="M52 60 L66 50" stroke="#C8845A" stroke-width="5" stroke-linecap="round"/>
+              <circle cx="67" cy="49" r="3.5" fill="#C8845A"/>
+              <!-- Samosa -->
+              <path d="M5 72 L16 60 L22 72 Z" fill="#F5C842"/>
+              <path d="M11 69 Q14 65 17 69" stroke="#E8A020" stroke-width="1.2" fill="none"/>
+            </svg>
           </div>
-          <svg class="char-svg" viewBox="0 0 52 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Rotund body - shirt straining -->
-            <ellipse cx="26" cy="56" rx="16" ry="20" fill="#E8A020"/>
-            <!-- Shirt buttons straining -->
-            <circle cx="26" cy="48" r="1" fill="#C47A15"/>
-            <circle cx="26" cy="53" r="1" fill="#C47A15"/>
-            <circle cx="26" cy="58" r="1" fill="#C47A15"/>
-            <!-- Head -->
-            <ellipse cx="26" cy="29" rx="11" ry="11" fill="#C4845A"/>
-            <!-- Magnificent moustache -->
-            <path d="M18 34 Q22 37 26 35 Q30 37 34 34" fill="#2C1810"/>
-            <!-- Eyes - aggressive -->
-            <ellipse cx="21" cy="28" rx="2" ry="1.5" fill="#2C1810"/>
-            <ellipse cx="31" cy="28" rx="2" ry="1.5" fill="#2C1810"/>
-            <!-- Eyebrows furrowed -->
-            <path d="M18 24 Q21 22 24 24" stroke="#2C1810" stroke-width="1.5" fill="none"/>
-            <path d="M28 24 Q31 22 34 24" stroke="#2C1810" stroke-width="1.5" fill="none"/>
-            <!-- Pointing finger - aggressive -->
-            <path d="M38 44 L48 38" stroke="#C4845A" stroke-width="4" stroke-linecap="round"/>
-            <circle cx="49" cy="37" r="2.5" fill="#C4845A"/>
-            <!-- Samosa in other hand -->
-            <path d="M6 52 L14 44 L18 52 Z" fill="#F5C842"/>
-            <path d="M10 50 Q12 47 14 50" stroke="#E8A020" stroke-width="1" fill="none"/>
-          </svg>
           <span class="char-name">Chacha</span>
         </div>
 
         <!-- GIRL'S MOM -->
         <div class="character" id="char-girlsmom">
-          <div class="bubble-wrap">
-            <div class="bubble" id="girlsmom-b1">Humari beti bahut simple hai</div>
-            <div class="bubble" id="girlsmom-b2">Usne 47 rishte reject kiye hain</div>
+          <div class="bubble-wrap"><div class="bubble" id="girlsmom-b1">Humari beti bahut simple hai</div><div class="bubble" id="girlsmom-b2">Usne 47 rishte reject kiye hain</div></div>
+          <div class="char-container">
+            <svg class="char-svg" id="svg-girlsmom" viewBox="0 0 70 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Saree deep red -->
+              <ellipse cx="35" cy="82" rx="18" ry="24" fill="#8B1A3A"/>
+              <rect x="17" y="98" width="36" height="4" rx="2" fill="#D4A017"/>
+              <g id="girlsmom-head" style="transform-origin: 35px 43px;">
+                <ellipse cx="35" cy="43" rx="13" ry="14" fill="#C8845A"/>
+                <path d="M22 35 Q35 26 48 35" fill="#1A0E08"/>
+                <!-- Reading glasses -->
+                <ellipse cx="28" cy="43" rx="4.5" ry="3" fill="none" stroke="#1A0E08" stroke-width="1.2"/>
+                <ellipse cx="42" cy="43" rx="4.5" ry="3" fill="none" stroke="#1A0E08" stroke-width="1.2"/>
+                <path d="M32.5 43 L37.5 43" stroke="#1A0E08" stroke-width="1.2"/>
+                <!-- Expression 1 - polished smile -->
+                <g id="girlsmom-expr1">
+                  <ellipse cx="28" cy="43" rx="1.5" ry="1.5" fill="#1A0E08"/>
+                  <ellipse cx="42" cy="43" rx="1.5" ry="1.5" fill="#1A0E08"/>
+                  <path d="M28 51 Q35 55 42 51" stroke="#1A0E08" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                </g>
+                <!-- Expression 2 - pen ready, unimpressed -->
+                <g id="girlsmom-expr2" style="display:none">
+                  <ellipse cx="28" cy="44" rx="1.5" ry="1.2" fill="#1A0E08"/>
+                  <ellipse cx="42" cy="44" rx="1.5" ry="1.2" fill="#1A0E08"/>
+                  <path d="M29 52 Q35 51 41 52" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
+                  <!-- One eyebrow up -->
+                  <path d="M38 37 Q42 35 46 37" stroke="#1A0E08" stroke-width="1.2" fill="none"/>
+                </g>
+              </g>
+              <!-- Long list -->
+              <rect x="5" y="60" width="10" height="28" rx="1.5" fill="white" stroke="#D4A017" stroke-width="0.8"/>
+              <path d="M6.5 64 L13.5 64" stroke="#8B1A3A" stroke-width="0.7"/>
+              <path d="M6.5 67 L13.5 67" stroke="#8B1A3A" stroke-width="0.7"/>
+              <path d="M6.5 70 L13.5 70" stroke="#8B1A3A" stroke-width="0.7"/>
+              <path d="M6.5 73 L11 73" stroke="#8B1A3A" stroke-width="0.7"/>
+              <path d="M6.5 76 L13.5 76" stroke="#8B1A3A" stroke-width="0.7"/>
+              <path d="M6.5 79 L10 79" stroke="#8B1A3A" stroke-width="0.7"/>
+              <!-- Pen -->
+              <rect x="52" y="58" width="3" height="18" rx="1.5" fill="#1A0E08"/>
+              <path d="M52 76 L55 76 L53.5 80 Z" fill="#1A0E08"/>
+              <!-- Arms -->
+              <path d="M17 66 L10 76" stroke="#C8845A" stroke-width="5" stroke-linecap="round"/>
+              <path d="M53 66 L54 72" stroke="#C8845A" stroke-width="5" stroke-linecap="round"/>
+            </svg>
           </div>
-          <svg class="char-svg" viewBox="0 0 52 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Saree - deep red -->
-            <ellipse cx="26" cy="58" rx="14" ry="18" fill="#8B1A3A"/>
-            <rect x="12" y="72" width="28" height="3" rx="1.5" fill="#D4A017"/>
-            <!-- Head -->
-            <ellipse cx="26" cy="30" rx="10" ry="11" fill="#C4845A"/>
-            <!-- Hair - neat -->
-            <path d="M16 24 Q26 18 36 24" fill="#2C1810"/>
-            <!-- Reading glasses -->
-            <ellipse cx="21" cy="30" rx="3.5" ry="2.5" fill="none" stroke="#2C1810" stroke-width="1"/>
-            <ellipse cx="31" cy="30" rx="3.5" ry="2.5" fill="none" stroke="#2C1810" stroke-width="1"/>
-            <path d="M24.5 30 L27.5 30" stroke="#2C1810" stroke-width="1"/>
-            <!-- Eyes -->
-            <ellipse cx="21" cy="30" rx="1.2" ry="1.2" fill="#2C1810"/>
-            <ellipse cx="31" cy="30" rx="1.2" ry="1.2" fill="#2C1810"/>
-            <!-- Determined mouth -->
-            <path d="M22 36 Q26 37 30 36" stroke="#2C1810" stroke-width="1" fill="none"/>
-            <!-- Long list in one hand -->
-            <rect x="4" y="44" width="8" height="22" rx="1" fill="white" stroke="#D4A017" stroke-width="0.5"/>
-            <path d="M5 47 L11 47" stroke="#8B1A3A" stroke-width="0.5"/>
-            <path d="M5 49 L11 49" stroke="#8B1A3A" stroke-width="0.5"/>
-            <path d="M5 51 L11 51" stroke="#8B1A3A" stroke-width="0.5"/>
-            <path d="M5 53 L9 53" stroke="#8B1A3A" stroke-width="0.5"/>
-            <!-- Pen in other hand -->
-            <rect x="38" y="42" width="2.5" height="14" rx="1" fill="#2C1810"/>
-            <!-- Arms -->
-            <path d="M12 46 L8 55" stroke="#C4845A" stroke-width="4" stroke-linecap="round"/>
-            <path d="M40 46 L40 50" stroke="#C4845A" stroke-width="4" stroke-linecap="round"/>
-          </svg>
           <span class="char-name">Girl's Mom</span>
         </div>
 
         <!-- THE GIRL -->
         <div class="character" id="char-girl">
-          <div class="bubble-wrap">
-            <div class="bubble" id="girl-b1">Ladka theek lag raha hai</div>
-            <div class="bubble" id="girl-b2">Uski mummy nahi lag rahi theek</div>
+          <div class="bubble-wrap"><div class="bubble" id="girl-b1">Ladka theek lag raha hai</div><div class="bubble" id="girl-b2">Uski mummy nahi lag rahi theek</div></div>
+          <div class="char-container">
+            <svg class="char-svg" id="svg-girl" viewBox="0 0 70 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Salwar kameez rose gold -->
+              <ellipse cx="35" cy="82" rx="17" ry="23" fill="#E8906A"/>
+              <!-- Dupatta gold -->
+              <path d="M18 58 Q35 52 52 58 Q48 68 35 72 Q22 68 18 58Z" fill="#D4A017" opacity="0.75"/>
+              <circle cx="26" cy="62" r="1.5" fill="#8B1A3A"/>
+              <circle cx="35" cy="59" r="1.5" fill="#8B1A3A"/>
+              <circle cx="44" cy="62" r="1.5" fill="#8B1A3A"/>
+              <g id="girl-head" style="transform-origin: 35px 42px;">
+                <ellipse cx="35" cy="42" rx="13" ry="14" fill="#C8845A"/>
+                <!-- Long hair -->
+                <path d="M22 36 Q35 26 48 36 L52 65 Q35 70 18 65Z" fill="#1A0E08"/>
+                <!-- Expression 1 - polite smile -->
+                <g id="girl-expr1">
+                  <ellipse cx="29" cy="41" rx="2" ry="2.2" fill="#1A0E08"/>
+                  <ellipse cx="41" cy="41" rx="2" ry="2.2" fill="#1A0E08"/>
+                  <path d="M28 49 Q35 54 42 49" stroke="#1A0E08" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                  <path d="M26 36 Q29 35 32 36" stroke="#1A0E08" stroke-width="1" fill="none"/>
+                  <path d="M38 36 Q41 35 44 36" stroke="#1A0E08" stroke-width="1" fill="none"/>
+                </g>
+                <!-- Expression 2 - subtle eye roll -->
+                <g id="girl-expr2" style="display:none">
+                  <!-- Eyes looking up slightly - eye roll -->
+                  <ellipse cx="29" cy="40" rx="2" ry="2.2" fill="#1A0E08"/>
+                  <ellipse cx="41" cy="40" rx="2" ry="2.2" fill="#1A0E08"/>
+                  <!-- One eyebrow arch -->
+                  <path d="M26 35 Q29 32 32 35" stroke="#1A0E08" stroke-width="1.2" fill="none"/>
+                  <path d="M38 34 Q41 32 44 35" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
+                  <!-- Still polite mouth but tighter -->
+                  <path d="M29 49 Q35 52 41 49" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
+                </g>
+              </g>
+              <!-- Handbag -->
+              <rect x="22" y="84" width="20" height="13" rx="4" fill="#8B1A3A"/>
+              <path d="M25 84 Q35 78 45 84" stroke="#8B1A3A" stroke-width="2" fill="none"/>
+              <!-- Earphones in pocket -->
+              <circle cx="52" cy="78" r="3" fill="white" stroke="#555" stroke-width="0.8"/>
+            </svg>
           </div>
-          <svg class="char-svg" viewBox="0 0 52 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Salwar kameez - rose gold -->
-            <ellipse cx="26" cy="58" rx="13" ry="19" fill="#E8906A"/>
-            <!-- Dupatta perfectly placed -->
-            <path d="M13 42 Q26 38 39 42 Q36 50 26 52 Q16 50 13 42Z" fill="#D4A017" opacity="0.7"/>
-            <!-- Embroidery detail -->
-            <circle cx="20" cy="45" r="1" fill="#8B1A3A"/>
-            <circle cx="26" cy="43" r="1" fill="#8B1A3A"/>
-            <circle cx="32" cy="45" r="1" fill="#8B1A3A"/>
-            <!-- Head -->
-            <ellipse cx="26" cy="28" rx="10" ry="11" fill="#C4845A"/>
-            <!-- Hair - long, neat -->
-            <path d="M16 24 Q26 18 36 24 L38 45 Q26 48 14 45Z" fill="#2C1810"/>
-            <!-- Eyes - knowing -->
-            <ellipse cx="22" cy="28" rx="1.5" ry="1.5" fill="#2C1810"/>
-            <ellipse cx="30" cy="28" rx="1.5" ry="1.5" fill="#2C1810"/>
-            <!-- One eyebrow slightly raised -->
-            <path d="M19 23 Q22 21 25 22" stroke="#2C1810" stroke-width="1" fill="none"/>
-            <path d="M27 22 Q30 22 33 23" stroke="#2C1810" stroke-width="1" fill="none"/>
-            <!-- Polite smile - doing a lot of work -->
-            <path d="M22 33 Q26 36 30 33" stroke="#2C1810" stroke-width="1" fill="none"/>
-            <!-- Small handbag on lap -->
-            <rect x="18" y="62" width="16" height="10" rx="3" fill="#8B1A3A"/>
-            <path d="M21 62 Q26 58 31 62" stroke="#8B1A3A" stroke-width="1.5" fill="none"/>
-            <!-- Earphones stuffed in pocket -->
-            <circle cx="38" cy="56" r="2" fill="white" stroke="#555" stroke-width="0.5"/>
-          </svg>
           <span class="char-name">The Girl</span>
         </div>
 
         <!-- YOUNGER BROTHER -->
         <div class="character" id="char-brother">
-          <div class="bubble-wrap">
-            <div class="bubble" id="brother-b1">Didi ki shaadi jaldi ho jaaye</div>
-            <div class="bubble" id="brother-b2">Akela kamra mil jaayega finally</div>
+          <div class="bubble-wrap"><div class="bubble" id="brother-b1">Didi ki shaadi jaldi ho jaaye</div><div class="bubble" id="brother-b2">Akela kamra mil jaayega finally</div></div>
+          <div class="char-container">
+            <svg class="char-svg" id="svg-brother" viewBox="0 0 70 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Shorts -->
+              <rect x="20" y="76" width="13" height="20" rx="4" fill="#444"/>
+              <rect x="37" y="76" width="13" height="20" rx="4" fill="#444"/>
+              <!-- Oversized tshirt -->
+              <rect x="13" y="52" width="44" height="28" rx="5" fill="#4A90D9"/>
+              <!-- Graphic -->
+              <circle cx="35" cy="66" r="7" fill="none" stroke="white" stroke-width="1.2"/>
+              <path d="M31 68 Q35 71 39 68" stroke="white" stroke-width="1.2" fill="none"/>
+              <g id="brother-head" style="transform-origin: 35px 41px;">
+                <ellipse cx="35" cy="41" rx="12" ry="13" fill="#C8845A"/>
+                <!-- Messy hair -->
+                <path d="M23 34 Q26 24 35 25 Q44 24 47 34" fill="#1A0E08"/>
+                <path d="M23 34 Q20 28 22 24" fill="#1A0E08"/>
+                <path d="M47 34 Q50 28 48 24" fill="#1A0E08"/>
+                <!-- Expression 1 - pretending to behave -->
+                <g id="brother-expr1">
+                  <ellipse cx="29" cy="40" rx="2" ry="2" fill="#1A0E08"/>
+                  <ellipse cx="41" cy="40" rx="2" ry="2" fill="#1A0E08"/>
+                  <path d="M29 48 Q35 50 41 48" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
+                  <path d="M26 34 Q29 33 32 34" stroke="#1A0E08" stroke-width="1" fill="none"/>
+                  <path d="M38 34 Q41 33 44 34" stroke="#1A0E08" stroke-width="1" fill="none"/>
+                </g>
+                <!-- Expression 2 - grinning at phone -->
+                <g id="brother-expr2" style="display:none">
+                  <!-- Eyes looking down at phone, lit up -->
+                  <ellipse cx="29" cy="41" rx="2" ry="1.5" fill="#1A0E08"/>
+                  <ellipse cx="41" cy="41" rx="2" ry="1.5" fill="#1A0E08"/>
+                  <!-- Phone glow on face -->
+                  <ellipse cx="35" cy="41" rx="12" ry="13" fill="#A8D4F0" opacity="0.12"/>
+                  <!-- Big grin -->
+                  <path d="M27 48 Q35 55 43 48" stroke="#1A0E08" stroke-width="2" fill="none" stroke-linecap="round"/>
+                  <!-- Raised cheeks from smile -->
+                  <ellipse cx="26" cy="46" rx="3" ry="2" fill="#C07850" opacity="0.3"/>
+                  <ellipse cx="44" cy="46" rx="3" ry="2" fill="#C07850" opacity="0.3"/>
+                </g>
+              </g>
+              <!-- Phone glowing -->
+              <rect x="44" y="60" width="13" height="20" rx="3" fill="#1A0E08"/>
+              <rect x="45" y="61" width="11" height="16" rx="2" fill="#A8D4F0"/>
+              <!-- Earphones -->
+              <path d="M22 52 Q35 47 44 52" stroke="white" stroke-width="1.2" fill="none"/>
+            </svg>
           </div>
-          <svg class="char-svg" viewBox="0 0 52 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Shorts -->
-            <rect x="16" y="56" width="8" height="14" rx="3" fill="#555"/>
-            <rect x="28" y="56" width="8" height="14" rx="3" fill="#555"/>
-            <!-- Oversized tshirt -->
-            <rect x="11" y="38" width="30" height="22" rx="4" fill="#4A90D9"/>
-            <!-- Graphic on tshirt - simple smile -->
-            <circle cx="26" cy="50" r="5" fill="none" stroke="white" stroke-width="1"/>
-            <path d="M23 52 Q26 54 29 52" stroke="white" stroke-width="1" fill="none"/>
-            <!-- Sitting sideways suggestion -->
-            <!-- Head -->
-            <ellipse cx="26" cy="28" rx="9" ry="10" fill="#C4845A"/>
-            <!-- Hair - messy teenager -->
-            <path d="M17 24 Q20 18 26 19 Q32 18 35 24" fill="#2C1810"/>
-            <path d="M17 24 Q15 20 17 18" fill="#2C1810"/>
-            <!-- Face lit by phone - slight glow -->
-            <ellipse cx="26" cy="28" rx="9" ry="10" fill="#A8D4F0" opacity="0.15"/>
-            <!-- Eyes - amused, looking down at phone -->
-            <ellipse cx="22" cy="29" rx="1.5" ry="1" fill="#2C1810"/>
-            <ellipse cx="30" cy="29" rx="1.5" ry="1" fill="#2C1810"/>
-            <!-- Grin -->
-            <path d="M21 34 Q26 38 31 34" stroke="#2C1810" stroke-width="1.5" fill="none"/>
-            <!-- Phone in hand - glowing -->
-            <rect x="32" y="44" width="10" height="16" rx="2" fill="#2C1810"/>
-            <rect x="33" y="45" width="8" height="12" rx="1" fill="#A8D4F0"/>
-            <!-- Earphones around neck -->
-            <path d="M18 38 Q26 35 34 38" stroke="white" stroke-width="1" fill="none"/>
-            <!-- Arms -->
-            <path d="M11 44 L7 54" stroke="#C4845A" stroke-width="4" stroke-linecap="round"/>
-            <path d="M41 44 L38 52" stroke="#C4845A" stroke-width="4" stroke-linecap="round"/>
-          </svg>
           <span class="char-name">Younger Bro</span>
         </div>
 
       </div>
     </div>
   </div>
-</div>
+</div></div>
 
 <div class="divider" style="margin-top: 2rem;">
   <div class="divider-line"></div>
@@ -1089,46 +1198,76 @@ function resetForm() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// BUBBLE ANIMATION SYSTEM
+// BUBBLE + EXPRESSION + HEAD ANIMATION SYSTEM
 const characters = [
-  { b1: 'mom-b1', b2: 'mom-b2', delay: 0 },
-  { b1: 'dad-b1', b2: 'dad-b2', delay: 700 },
-  { b1: 'boy-b1', b2: 'boy-b2', delay: 1400 },
-  { b1: 'bua-b1', b2: 'bua-b2', delay: 2100 },
-  { b1: 'dadiji-b1', b2: 'dadiji-b2', delay: 400 },
-  { b1: 'chacha-b1', b2: 'chacha-b2', delay: 1100 },
-  { b1: 'girlsmom-b1', b2: 'girlsmom-b2', delay: 1800 },
-  { b1: 'girl-b1', b2: 'girl-b2', delay: 900 },
-  { b1: 'brother-b1', b2: 'brother-b2', delay: 300 },
+  { id: 'mom', b1: 'mom-b1', b2: 'mom-b2', head: 'mom-head', e1: 'mom-expr1', e2: 'mom-expr2', delay: 0 },
+  { id: 'dad', b1: 'dad-b1', b2: 'dad-b2', head: 'dad-head', e1: 'dad-expr1', e2: 'dad-expr2', delay: 800 },
+  { id: 'boy', b1: 'boy-b1', b2: 'boy-b2', head: 'boy-head', e1: 'boy-expr1', e2: 'boy-expr2', delay: 1600 },
+  { id: 'bua', b1: 'bua-b1', b2: 'bua-b2', head: 'bua-head', e1: 'bua-expr1', e2: 'bua-expr2', delay: 2400 },
+  { id: 'dadiji', b1: 'dadiji-b1', b2: 'dadiji-b2', head: 'dadiji-head', e1: 'dadiji-expr1', e2: 'dadiji-expr2', delay: 400 },
+  { id: 'chacha', b1: 'chacha-b1', b2: 'chacha-b2', head: 'chacha-head', e1: 'chacha-expr1', e2: 'chacha-expr2', delay: 1200 },
+  { id: 'girlsmom', b1: 'girlsmom-b1', b2: 'girlsmom-b2', head: 'girlsmom-head', e1: 'girlsmom-expr1', e2: 'girlsmom-expr2', delay: 2000 },
+  { id: 'girl', b1: 'girl-b1', b2: 'girl-b2', head: 'girl-head', e1: 'girl-expr1', e2: 'girl-expr2', delay: 1000 },
+  { id: 'brother', b1: 'brother-b1', b2: 'brother-b2', head: 'brother-head', e1: 'brother-expr1', e2: 'brother-expr2', delay: 200 },
 ];
 
-function animateBubble(char) {
+function nodHead(headEl, direction) {
+  if (!headEl) return;
+  const angle = direction === 'right' ? 8 : -8;
+  headEl.style.transition = 'transform 0.3s ease';
+  headEl.style.transform = 'rotate(' + angle + 'deg)';
+  setTimeout(() => {
+    headEl.style.transform = 'rotate(0deg)';
+  }, 350);
+}
+
+function switchExpression(char, showFirst) {
+  const e1 = document.getElementById(char.e1);
+  const e2 = document.getElementById(char.e2);
+  if (!e1 || !e2) return;
+  if (showFirst) {
+    e1.style.display = 'block';
+    e2.style.display = 'none';
+  } else {
+    e1.style.display = 'none';
+    e2.style.display = 'block';
+  }
+}
+
+function animateCharacter(char) {
   const b1 = document.getElementById(char.b1);
   const b2 = document.getElementById(char.b2);
-  
+  const headEl = document.getElementById(char.head);
+
   const cycle = () => {
-    // Show bubble 1
+    // Show bubble 1 with expression 1
     b1.classList.add('visible');
     b2.classList.remove('visible');
-    
+    switchExpression(char, true);
+    nodHead(headEl, 'left');
+
     setTimeout(() => {
-      // Switch to bubble 2
       b1.classList.remove('visible');
+
       setTimeout(() => {
+        // Show bubble 2 with expression 2
         b2.classList.add('visible');
+        switchExpression(char, false);
+        nodHead(headEl, 'right');
+
         setTimeout(() => {
           b2.classList.remove('visible');
-          setTimeout(cycle, 600);
-        }, 3200);
+          setTimeout(cycle, 500);
+        }, 3500);
       }, 400);
-    }, 3200);
+    }, 3500);
   };
 
   setTimeout(cycle, char.delay);
 }
 
-// Start all bubble animations
-characters.forEach(char => animateBubble(char));
+// Start all character animations
+characters.forEach(char => animateCharacter(char));
 </script>
 
 </body>

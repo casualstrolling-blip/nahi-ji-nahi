@@ -133,12 +133,19 @@
     align-items: flex-end;
     gap: 8px;
     padding-top: 1rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 0.5rem;
   }
+
+  .characters-row::-webkit-scrollbar { display: none; }
 
   .side {
     display: flex;
-    gap: 6px;
+    gap: 8px;
     align-items: flex-end;
+    flex-shrink: 0;
   }
 
   .side.boys { justify-content: flex-start; }
@@ -146,10 +153,12 @@
 
   .scene-divider {
     width: 1px;
+    min-width: 1px;
     height: 120px;
     background: linear-gradient(to bottom, transparent, rgba(212,160,23,0.3), transparent);
     flex-shrink: 0;
     align-self: center;
+    margin: 0 4px;
   }
 
   /* CHARACTERS */
@@ -621,39 +630,45 @@
           <div class="bubble-wrap"><div class="bubble" id="dad-b1">Beta ki khushi mein humari khushi</div><div class="bubble" id="dad-b2">Bas nipat jaaye ek baar</div></div>
           <div class="char-container">
             <svg class="char-svg" id="svg-dad" viewBox="0 0 70 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Kurta -->
-              <rect x="18" y="56" width="34" height="48" rx="5" fill="#E8A020"/>
-              <path d="M29 56 L35 64 L41 56" fill="#FDF6EC"/>
-              <!-- Pyjama -->
-              <rect x="20" y="84" width="12" height="20" rx="4" fill="#FDF6EC"/>
-              <rect x="38" y="84" width="12" height="20" rx="4" fill="#FDF6EC"/>
-              <g id="dad-head" style="transform-origin: 35px 44px;">
-                <ellipse cx="35" cy="44" rx="13" ry="14" fill="#B87040"/>
-                <!-- Thinning hair -->
-                <path d="M22 36 Q26 28 35 28 Q44 28 48 36" fill="#1A0E08"/>
+              <!-- Legs properly connected -->
+              <rect x="22" y="80" width="11" height="26" rx="5" fill="#FDF6EC"/>
+              <rect x="37" y="80" width="11" height="26" rx="5" fill="#FDF6EC"/>
+              <!-- Shoes -->
+              <ellipse cx="27" cy="106" rx="7" ry="3" fill="#2C1810"/>
+              <ellipse cx="42" cy="106" rx="7" ry="3" fill="#2C1810"/>
+              <!-- Kurta properly sized -->
+              <rect x="17" y="54" width="36" height="30" rx="5" fill="#E8A020"/>
+              <path d="M28 54 L35 62 L42 54" fill="#FDF6EC"/>
+              <!-- Belt line -->
+              <rect x="17" y="80" width="36" height="4" rx="2" fill="#C47A15"/>
+              <g id="dad-head" style="transform-origin: 35px 40px;">
+                <ellipse cx="35" cy="40" rx="13" ry="14" fill="#B87040"/>
+                <!-- Thinning hair - realistic -->
+                <path d="M22 32 Q26 24 35 24 Q44 24 48 32" fill="#1A0E08"/>
+                <!-- Bald patch suggestion -->
+                <ellipse cx="35" cy="28" rx="6" ry="4" fill="#B87040" opacity="0.4"/>
                 <!-- Moustache -->
-                <path d="M28 50 Q35 53 42 50" stroke="#1A0E08" stroke-width="2" fill="none"/>
-                <!-- Expression 1 - polite nod, eyes open -->
+                <path d="M27 47 Q31 50 35 48 Q39 50 43 47" fill="#1A0E08"/>
+                <!-- Expression 1 - polite nod -->
                 <g id="dad-expr1">
-                  <ellipse cx="29" cy="43" rx="2" ry="2" fill="#1A0E08"/>
-                  <ellipse cx="41" cy="43" rx="2" ry="2" fill="#1A0E08"/>
-                  <path d="M30 52 Q35 53 40 52" stroke="#1A0E08" stroke-width="1.2" fill="none"/>
-                  <path d="M26 38 Q29 37 32 38" stroke="#1A0E08" stroke-width="1" fill="none"/>
-                  <path d="M38 38 Q41 37 44 38" stroke="#1A0E08" stroke-width="1" fill="none"/>
+                  <ellipse cx="29" cy="39" rx="2" ry="2" fill="#1A0E08"/>
+                  <ellipse cx="41" cy="39" rx="2" ry="2" fill="#1A0E08"/>
+                  <path d="M30 44 Q35 46 40 44" stroke="#1A0E08" stroke-width="1.2" fill="none"/>
+                  <path d="M26 34 Q29 33 32 34" stroke="#1A0E08" stroke-width="1" fill="none"/>
+                  <path d="M38 34 Q41 33 44 34" stroke="#1A0E08" stroke-width="1" fill="none"/>
                 </g>
-                <!-- Expression 2 - eyes half closed, checked out -->
+                <!-- Expression 2 - eyes completely glazed -->
                 <g id="dad-expr2" style="display:none">
-                  <ellipse cx="29" cy="44" rx="2" ry="1" fill="#1A0E08"/>
-                  <ellipse cx="41" cy="44" rx="2" ry="1" fill="#1A0E08"/>
-                  <!-- Heavy eyelids -->
-                  <path d="M27 43 Q29 42 31 43" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
-                  <path d="M39 43 Q41 42 43 43" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
-                  <path d="M30 52 Q35 51 40 52" stroke="#1A0E08" stroke-width="1.2" fill="none"/>
+                  <ellipse cx="29" cy="40" rx="2" ry="0.8" fill="#1A0E08"/>
+                  <ellipse cx="41" cy="40" rx="2" ry="0.8" fill="#1A0E08"/>
+                  <path d="M27 38 Q29 37 31 38" stroke="#1A0E08" stroke-width="1.8" fill="none"/>
+                  <path d="M39 38 Q41 37 43 38" stroke="#1A0E08" stroke-width="1.8" fill="none"/>
+                  <path d="M30 44 Q35 43 40 44" stroke="#1A0E08" stroke-width="1" fill="none"/>
                 </g>
               </g>
-              <!-- Arms slightly away -->
-              <path d="M18 64 L10 78" stroke="#B87040" stroke-width="5" stroke-linecap="round"/>
-              <path d="M52 64 L58 72" stroke="#B87040" stroke-width="5" stroke-linecap="round"/>
+              <!-- Arms -->
+              <path d="M17 62 L9 74" stroke="#B87040" stroke-width="5" stroke-linecap="round"/>
+              <path d="M53 62 L60 70" stroke="#B87040" stroke-width="5" stroke-linecap="round"/>
             </svg>
           </div>
           <span class="char-name">Dad</span>
@@ -714,36 +729,60 @@
           <div class="bubble-wrap"><div class="bubble" id="bua-b1">Haan dekhte hain</div><div class="bubble" id="bua-b2">Mujhe toh pehle din se pata tha — nahi hoga</div></div>
           <div class="char-container">
             <svg class="char-svg" id="svg-bua" viewBox="0 0 70 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Saree turmeric -->
-              <ellipse cx="35" cy="82" rx="17" ry="23" fill="#E8A020"/>
-              <rect x="18" y="97" width="34" height="4" rx="2" fill="#8B1A3A"/>
-              <!-- Arms crossed firmly -->
-              <path d="M18 68 Q28 63 35 65 Q42 63 52 68" stroke="#C8845A" stroke-width="6" stroke-linecap="round" fill="none"/>
-              <!-- Chai cup balanced -->
-              <rect x="27" y="60" width="10" height="8" rx="2" fill="#F5C842"/>
-              <g id="bua-head" style="transform-origin: 35px 43px;">
-                <ellipse cx="35" cy="43" rx="12" ry="13" fill="#B87040"/>
-                <!-- Grey bun -->
-                <ellipse cx="35" cy="28" rx="10" ry="6" fill="#888"/>
-                <circle cx="35" cy="24" r="5" fill="#888"/>
-                <!-- Expression 1 - neutral waiting -->
+              <!-- Legs -->
+              <rect x="23" y="86" width="10" height="20" rx="5" fill="#E8A020"/>
+              <rect x="37" y="86" width="10" height="20" rx="5" fill="#E8A020"/>
+              <ellipse cx="28" cy="106" rx="7" ry="3" fill="#8B4513"/>
+              <ellipse cx="42" cy="106" rx="7" ry="3" fill="#8B4513"/>
+              <!-- Saree turmeric with maroon border -->
+              <ellipse cx="35" cy="80" rx="17" ry="10" fill="#E8A020"/>
+              <rect x="18" y="86" width="34" height="4" rx="2" fill="#8B1A3A"/>
+              <!-- Blouse -->
+              <rect x="22" y="62" width="26" height="20" rx="4" fill="#C47A15"/>
+              <!-- Arms crossed firmly - the signature pose -->
+              <path d="M16 70 Q26 65 35 68 Q44 65 54 70" stroke="#B87040" stroke-width="7" stroke-linecap="round" fill="none"/>
+              <!-- Right arm over left -->
+              <path d="M35 68 Q44 65 54 70" stroke="#C8845A" stroke-width="6" stroke-linecap="round" fill="none"/>
+              <!-- Chai cup perfectly balanced on crossed arms -->
+              <rect x="28" y="60" width="12" height="9" rx="2" fill="#F5C842"/>
+              <path d="M40 63 Q44 63 44 67 Q44 71 40 71" stroke="#D4A017" stroke-width="1.5" fill="none"/>
+              <!-- Decorative fan in other hand -->
+              <path d="M14 65 Q10 58 14 52 Q18 46 22 52" fill="#C94070" opacity="0.8"/>
+              <path d="M14 65 L18 52" stroke="#8B1A3A" stroke-width="1" fill="none"/>
+              <g id="bua-head" style="transform-origin: 35px 42px;">
+                <ellipse cx="35" cy="42" rx="13" ry="14" fill="#B87040"/>
+                <!-- Proper grey hair - side parted bun with visible strands -->
+                <path d="M22 34 Q35 24 48 34" fill="#666"/>
+                <!-- Side strands showing grey -->
+                <path d="M22 34 L20 48" stroke="#777" stroke-width="4" stroke-linecap="round"/>
+                <path d="M48 34 L50 48" stroke="#777" stroke-width="4" stroke-linecap="round"/>
+                <!-- Bun at back/top - visible from front -->
+                <ellipse cx="35" cy="26" rx="9" ry="6" fill="#666"/>
+                <circle cx="35" cy="22" r="5" fill="#666"/>
+                <!-- Bun net detail -->
+                <ellipse cx="35" cy="24" rx="7" ry="4" fill="none" stroke="#888" stroke-width="0.8"/>
+                <!-- Hairpin -->
+                <rect x="38" y="21" width="7" height="1.5" rx="0.75" fill="#D4A017"/>
+                <!-- Expression 1 - watching, waiting, arms crossed smile -->
                 <g id="bua-expr1">
-                  <ellipse cx="29" cy="42" rx="2" ry="2" fill="#1A0E08"/>
-                  <ellipse cx="41" cy="42" rx="2" ry="2" fill="#1A0E08"/>
-                  <!-- Thin line mouth - neutral -->
-                  <path d="M29 50 Q35 50 41 50" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
-                  <path d="M26 37 Q29 36 32 37" stroke="#1A0E08" stroke-width="1" fill="none"/>
-                  <path d="M38 37 Q41 36 44 37" stroke="#1A0E08" stroke-width="1" fill="none"/>
+                  <ellipse cx="29" cy="41" rx="2" ry="2" fill="#1A0E08"/>
+                  <ellipse cx="41" cy="41" rx="2" ry="2" fill="#1A0E08"/>
+                  <!-- Neutral knowing mouth -->
+                  <path d="M29 49 Q35 50 41 49" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
+                  <path d="M26 36 Q29 35 32 36" stroke="#1A0E08" stroke-width="1" fill="none"/>
+                  <path d="M38 36 Q41 35 44 36" stroke="#1A0E08" stroke-width="1" fill="none"/>
                 </g>
-                <!-- Expression 2 - one eyebrow raised, disapproving -->
+                <!-- Expression 2 - I KNEW IT, eyebrow through roof -->
                 <g id="bua-expr2" style="display:none">
-                  <ellipse cx="29" cy="43" rx="2" ry="1.5" fill="#1A0E08"/>
-                  <ellipse cx="41" cy="42" rx="2" ry="2" fill="#1A0E08"/>
-                  <!-- One eyebrow WAY up -->
-                  <path d="M26 38 Q29 36 32 38" stroke="#1A0E08" stroke-width="1" fill="none"/>
-                  <path d="M38 35 Q41 32 44 35" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
-                  <!-- Disapproving thin mouth -->
-                  <path d="M30 51 Q35 49 40 51" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
+                  <!-- Left eye normal, right eyebrow sky high -->
+                  <ellipse cx="29" cy="42" rx="2" ry="1.8" fill="#1A0E08"/>
+                  <ellipse cx="41" cy="41" rx="2" ry="2" fill="#1A0E08"/>
+                  <!-- Left eyebrow normal -->
+                  <path d="M26 37 Q29 36 32 37" stroke="#1A0E08" stroke-width="1" fill="none"/>
+                  <!-- Right eyebrow VERY high -->
+                  <path d="M38 33 Q41 29 44 33" stroke="#1A0E08" stroke-width="2" fill="none"/>
+                  <!-- Slight smug smile - she was right all along -->
+                  <path d="M29 50 Q33 52 41 48" stroke="#1A0E08" stroke-width="1.5" fill="none" stroke-linecap="round"/>
                 </g>
               </g>
             </svg>
@@ -763,43 +802,65 @@
           <div class="bubble-wrap"><div class="bubble" id="dadiji-b1">Ladki bahut achhi lagi humein</div><div class="bubble" id="dadiji-b2">Rang thoda aur saaf hota toh...</div></div>
           <div class="char-container">
             <svg class="char-svg" id="svg-dadiji" viewBox="0 0 70 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Tiny ivory saree -->
-              <ellipse cx="35" cy="84" rx="14" ry="20" fill="#FAF0E0"/>
-              <rect x="21" y="97" width="28" height="4" rx="2" fill="#E8A020"/>
-              <g id="dadiji-head" style="transform-origin: 35px 46px;">
-                <ellipse cx="35" cy="46" rx="11" ry="12" fill="#B87040"/>
-                <!-- Enormous white bun -->
-                <circle cx="35" cy="30" r="10" fill="white" stroke="#DDD" stroke-width="1"/>
-                <ellipse cx="35" cy="25" rx="8" ry="5" fill="white"/>
-                <!-- Thick round glasses -->
-                <circle cx="28" cy="46" r="5" fill="none" stroke="#8B1A3A" stroke-width="1.8"/>
-                <circle cx="42" cy="46" r="5" fill="none" stroke="#8B1A3A" stroke-width="1.8"/>
-                <path d="M33 46 L37 46" stroke="#8B1A3A" stroke-width="1.8"/>
-                <path d="M23 46 L20 44" stroke="#8B1A3A" stroke-width="1.8"/>
-                <path d="M47 46 L50 44" stroke="#8B1A3A" stroke-width="1.8"/>
-                <!-- Expression 1 - sweet smile -->
+              <!-- Tiny legs with sandals -->
+              <rect x="25" y="88" width="8" height="16" rx="4" fill="#FAF0E0"/>
+              <rect x="37" y="88" width="8" height="16" rx="4" fill="#FAF0E0"/>
+              <ellipse cx="29" cy="104" rx="6" ry="2.5" fill="#C8A870"/>
+              <ellipse cx="41" cy="104" rx="6" ry="2.5" fill="#C8A870"/>
+              <!-- Tiny ivory saree - proper shape -->
+              <ellipse cx="35" cy="80" rx="13" ry="12" fill="#FAF0E0"/>
+              <rect x="22" y="88" width="26" height="3" rx="1.5" fill="#E8A020"/>
+              <!-- Blouse -->
+              <rect x="26" y="66" width="18" height="16" rx="3" fill="#E8D5A0"/>
+              <!-- Walking stick - left side -->
+              <path d="M20 60 L18 108" stroke="#8B6914" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="19" cy="60" r="5" fill="#C94070"/>
+              <circle cx="17" cy="55" r="2.5" fill="#E8A020"/>
+              <circle cx="22" cy="55" r="2.5" fill="#E8A020"/>
+              <!-- Small hands gripping stick -->
+              <ellipse cx="22" cy="72" rx="5" ry="4" fill="#C8845A"/>
+              <ellipse cx="22" cy="80" rx="4" ry="3.5" fill="#C8845A"/>
+              <g id="dadiji-head" style="transform-origin: 35px 48px;">
+                <!-- Small face - she is tiny -->
+                <ellipse cx="35" cy="50" rx="12" ry="13" fill="#A86840"/>
+                <!-- ENORMOUS white bun - bigger than her head -->
+                <circle cx="35" cy="32" r="14" fill="#F0F0F0" stroke="#E0E0E0" stroke-width="1"/>
+                <ellipse cx="35" cy="24" rx="11" ry="7" fill="#F0F0F0"/>
+                <!-- Bun texture lines -->
+                <path d="M25 28 Q35 22 45 28" stroke="#DDD" stroke-width="0.8" fill="none"/>
+                <path d="M23 33 Q35 26 47 33" stroke="#DDD" stroke-width="0.8" fill="none"/>
+                <!-- Hairpin -->
+                <rect x="38" y="23" width="6" height="1.5" rx="0.75" fill="#D4A017"/>
+                <!-- Big round glasses dominating face -->
+                <circle cx="28" cy="50" r="6" fill="rgba(200,220,255,0.3)" stroke="#8B1A3A" stroke-width="2"/>
+                <circle cx="42" cy="50" r="6" fill="rgba(200,220,255,0.3)" stroke="#8B1A3A" stroke-width="2"/>
+                <path d="M34 50 L36 50" stroke="#8B1A3A" stroke-width="2"/>
+                <path d="M22 50 L19 48" stroke="#8B1A3A" stroke-width="2"/>
+                <path d="M48 50 L51 48" stroke="#8B1A3A" stroke-width="2"/>
+                <!-- Expression 1 - sweet deceptive smile -->
                 <g id="dadiji-expr1">
-                  <ellipse cx="28" cy="46" rx="1.5" ry="1.5" fill="#1A0E08"/>
-                  <ellipse cx="42" cy="46" rx="1.5" ry="1.5" fill="#1A0E08"/>
-                  <path d="M29 54 Q35 57 41 54" stroke="#1A0E08" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                  <ellipse cx="28" cy="50" rx="1.8" ry="1.8" fill="#1A0E08"/>
+                  <ellipse cx="42" cy="50" rx="1.8" ry="1.8" fill="#1A0E08"/>
+                  <path d="M28 58 Q35 62 42 58" stroke="#1A0E08" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                  <!-- Rosy cheeks -->
+                  <ellipse cx="24" cy="55" rx="3" ry="2" fill="#C94070" opacity="0.25"/>
+                  <ellipse cx="46" cy="55" rx="3" ry="2" fill="#C94070" opacity="0.25"/>
                 </g>
-                <!-- Expression 2 - sharp judging look -->
+                <!-- Expression 2 - the real face: sharp, judging, has decided -->
                 <g id="dadiji-expr2" style="display:none">
-                  <ellipse cx="28" cy="47" rx="1.5" ry="1.2" fill="#1A0E08"/>
-                  <ellipse cx="42" cy="47" rx="1.5" ry="1.2" fill="#1A0E08"/>
-                  <!-- Squinting -->
-                  <path d="M25 45 Q28 44 31 45" stroke="#1A0E08" stroke-width="1" fill="none"/>
-                  <path d="M39 45 Q42 44 45 45" stroke="#1A0E08" stroke-width="1" fill="none"/>
-                  <path d="M30 54 Q35 52 40 54" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
+                  <!-- Narrowed eyes looking over glasses -->
+                  <ellipse cx="28" cy="49" rx="1.8" ry="1.2" fill="#1A0E08"/>
+                  <ellipse cx="42" cy="49" rx="1.8" ry="1.2" fill="#1A0E08"/>
+                  <!-- Glasses pushed down nose -->
+                  <circle cx="28" cy="52" r="6" fill="none" stroke="#8B1A3A" stroke-width="2"/>
+                  <circle cx="42" cy="52" r="6" fill="none" stroke="#8B1A3A" stroke-width="2"/>
+                  <!-- Eyebrows low and judging -->
+                  <path d="M23 45 Q28 43 33 45" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
+                  <path d="M37 45 Q42 43 47 45" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
+                  <!-- Thin decisive mouth -->
+                  <path d="M29 59 Q35 57 41 59" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
                 </g>
               </g>
-              <!-- Hands on walking stick -->
-              <path d="M26 72 Q35 68 44 72" stroke="#C8845A" stroke-width="4" stroke-linecap="round" fill="none"/>
-              <!-- Walking stick with flower -->
-              <path d="M48 62 L50 106" stroke="#8B6914" stroke-width="3" stroke-linecap="round"/>
-              <circle cx="49" cy="62" r="4" fill="#C94070"/>
-              <circle cx="47" cy="58" r="2" fill="#E8A020"/>
-              <circle cx="51" cy="58" r="2" fill="#E8A020"/>
             </svg>
           </div>
           <span class="char-name">Dadiji</span>
@@ -864,19 +925,27 @@
                 <ellipse cx="28" cy="43" rx="4.5" ry="3" fill="none" stroke="#1A0E08" stroke-width="1.2"/>
                 <ellipse cx="42" cy="43" rx="4.5" ry="3" fill="none" stroke="#1A0E08" stroke-width="1.2"/>
                 <path d="M32.5 43 L37.5 43" stroke="#1A0E08" stroke-width="1.2"/>
-                <!-- Expression 1 - polished smile -->
+                <!-- Expression 1 - polished professional smile -->
                 <g id="girlsmom-expr1">
-                  <ellipse cx="28" cy="43" rx="1.5" ry="1.5" fill="#1A0E08"/>
-                  <ellipse cx="42" cy="43" rx="1.5" ry="1.5" fill="#1A0E08"/>
-                  <path d="M28 51 Q35 55 42 51" stroke="#1A0E08" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                  <ellipse cx="28" cy="43" rx="2" ry="2" fill="#1A0E08"/>
+                  <ellipse cx="42" cy="43" rx="2" ry="2" fill="#1A0E08"/>
+                  <path d="M27 51 Q35 56 43 51" stroke="#1A0E08" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                  <!-- Smile cheeks -->
+                  <ellipse cx="24" cy="48" rx="3" ry="2" fill="#C94070" opacity="0.2"/>
+                  <ellipse cx="46" cy="48" rx="3" ry="2" fill="#C94070" opacity="0.2"/>
+                  <path d="M24 37 Q28 36 32 37" stroke="#1A0E08" stroke-width="1" fill="none"/>
+                  <path d="M38 37 Q42 36 46 37" stroke="#1A0E08" stroke-width="1" fill="none"/>
                 </g>
-                <!-- Expression 2 - pen ready, unimpressed -->
+                <!-- Expression 2 - 47 rishte rejected, pen poised, unimpressed -->
                 <g id="girlsmom-expr2" style="display:none">
-                  <ellipse cx="28" cy="44" rx="1.5" ry="1.2" fill="#1A0E08"/>
-                  <ellipse cx="42" cy="44" rx="1.5" ry="1.2" fill="#1A0E08"/>
-                  <path d="M29 52 Q35 51 41 52" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
-                  <!-- One eyebrow up -->
-                  <path d="M38 37 Q42 35 46 37" stroke="#1A0E08" stroke-width="1.2" fill="none"/>
+                  <ellipse cx="28" cy="44" rx="2" ry="1.2" fill="#1A0E08"/>
+                  <ellipse cx="42" cy="44" rx="2" ry="1.2" fill="#1A0E08"/>
+                  <!-- Both eyebrows raised - professional skepticism -->
+                  <path d="M24 36 Q28 33 32 36" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
+                  <path d="M38 36 Q42 33 46 36" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
+                  <!-- Thin line of assessment -->
+                  <path d="M28 52 Q35 50 42 52" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
+                  <!-- Glasses pushed up - serious mode -->
                 </g>
               </g>
               <!-- Long list -->
@@ -903,42 +972,71 @@
           <div class="bubble-wrap"><div class="bubble" id="girl-b1">Ladka theek lag raha hai</div><div class="bubble" id="girl-b2">Uski mummy nahi lag rahi theek</div></div>
           <div class="char-container">
             <svg class="char-svg" id="svg-girl" viewBox="0 0 70 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Salwar kameez rose gold -->
-              <ellipse cx="35" cy="82" rx="17" ry="23" fill="#E8906A"/>
-              <!-- Dupatta gold -->
-              <path d="M18 58 Q35 52 52 58 Q48 68 35 72 Q22 68 18 58Z" fill="#D4A017" opacity="0.75"/>
-              <circle cx="26" cy="62" r="1.5" fill="#8B1A3A"/>
-              <circle cx="35" cy="59" r="1.5" fill="#8B1A3A"/>
-              <circle cx="44" cy="62" r="1.5" fill="#8B1A3A"/>
-              <g id="girl-head" style="transform-origin: 35px 42px;">
-                <ellipse cx="35" cy="42" rx="13" ry="14" fill="#C8845A"/>
-                <!-- Long hair -->
-                <path d="M22 36 Q35 26 48 36 L52 65 Q35 70 18 65Z" fill="#1A0E08"/>
-                <!-- Expression 1 - polite smile -->
+              <!-- Legs with heels -->
+              <rect x="23" y="84" width="10" height="20" rx="5" fill="#E8906A"/>
+              <rect x="37" y="84" width="10" height="20" rx="5" fill="#E8906A"/>
+              <ellipse cx="28" cy="104" rx="7" ry="3" fill="#8B1A3A"/>
+              <ellipse cx="42" cy="104" rx="7" ry="3" fill="#8B1A3A"/>
+              <!-- Small heel -->
+              <rect x="32" y="103" width="2" height="5" rx="1" fill="#6B0A2A"/>
+              <rect x="46" y="103" width="2" height="5" rx="1" fill="#6B0A2A"/>
+              <!-- Salwar kameez - front facing, fitted -->
+              <rect x="20" y="58" width="30" height="30" rx="5" fill="#E8906A"/>
+              <!-- Neckline -->
+              <path d="M28 58 Q35 64 42 58" fill="#D4784A"/>
+              <!-- Dupatta draped properly front-facing -->
+              <path d="M20 62 Q28 58 35 60 Q42 58 50 62" stroke="#D4A017" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <!-- Embroidery dots on kameez -->
+              <circle cx="28" cy="72" r="1.5" fill="#8B1A3A"/>
+              <circle cx="35" cy="70" r="1.5" fill="#8B1A3A"/>
+              <circle cx="42" cy="72" r="1.5" fill="#8B1A3A"/>
+              <circle cx="28" cy="80" r="1" fill="#D4A017"/>
+              <circle cx="42" cy="80" r="1" fill="#D4A017"/>
+              <g id="girl-head" style="transform-origin: 35px 40px;">
+                <ellipse cx="35" cy="40" rx="13" ry="14" fill="#C8845A"/>
+                <!-- Hair parted in middle, falls on sides - FRONT FACING -->
+                <path d="M22 34 Q35 24 48 34" fill="#1A0E08"/>
+                <!-- Side hair falling properly -->
+                <path d="M22 34 L19 55" stroke="#1A0E08" stroke-width="5" stroke-linecap="round"/>
+                <path d="M48 34 L51 55" stroke="#1A0E08" stroke-width="5" stroke-linecap="round"/>
+                <!-- Expression 1 - polite perfect smile -->
                 <g id="girl-expr1">
-                  <ellipse cx="29" cy="41" rx="2" ry="2.2" fill="#1A0E08"/>
-                  <ellipse cx="41" cy="41" rx="2" ry="2.2" fill="#1A0E08"/>
-                  <path d="M28 49 Q35 54 42 49" stroke="#1A0E08" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                  <path d="M26 36 Q29 35 32 36" stroke="#1A0E08" stroke-width="1" fill="none"/>
-                  <path d="M38 36 Q41 35 44 36" stroke="#1A0E08" stroke-width="1" fill="none"/>
+                  <ellipse cx="29" cy="40" rx="2.2" ry="2.2" fill="#1A0E08"/>
+                  <ellipse cx="41" cy="40" rx="2.2" ry="2.2" fill="#1A0E08"/>
+                  <!-- Eyelashes -->
+                  <path d="M27 38 L26 36" stroke="#1A0E08" stroke-width="1"/>
+                  <path d="M29 37 L29 35" stroke="#1A0E08" stroke-width="1"/>
+                  <path d="M31 38 L32 36" stroke="#1A0E08" stroke-width="1"/>
+                  <path d="M39 38 L38 36" stroke="#1A0E08" stroke-width="1"/>
+                  <path d="M41 37 L41 35" stroke="#1A0E08" stroke-width="1"/>
+                  <path d="M43 38 L44 36" stroke="#1A0E08" stroke-width="1"/>
+                  <path d="M27 49 Q35 54 43 49" stroke="#1A0E08" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                  <!-- Rosy cheeks -->
+                  <ellipse cx="25" cy="44" rx="3" ry="2" fill="#C94070" opacity="0.2"/>
+                  <ellipse cx="45" cy="44" rx="3" ry="2" fill="#C94070" opacity="0.2"/>
+                  <path d="M26 35 Q29 34 32 35" stroke="#1A0E08" stroke-width="1" fill="none"/>
+                  <path d="M38 35 Q41 34 44 35" stroke="#1A0E08" stroke-width="1" fill="none"/>
                 </g>
-                <!-- Expression 2 - subtle eye roll -->
+                <!-- Expression 2 - she has already decided, subtle eye roll -->
                 <g id="girl-expr2" style="display:none">
-                  <!-- Eyes looking up slightly - eye roll -->
-                  <ellipse cx="29" cy="40" rx="2" ry="2.2" fill="#1A0E08"/>
-                  <ellipse cx="41" cy="40" rx="2" ry="2.2" fill="#1A0E08"/>
-                  <!-- One eyebrow arch -->
-                  <path d="M26 35 Q29 32 32 35" stroke="#1A0E08" stroke-width="1.2" fill="none"/>
-                  <path d="M38 34 Q41 32 44 35" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
-                  <!-- Still polite mouth but tighter -->
-                  <path d="M29 49 Q35 52 41 49" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
+                  <ellipse cx="29" cy="39" rx="2.2" ry="2" fill="#1A0E08"/>
+                  <ellipse cx="41" cy="39" rx="2.2" ry="2" fill="#1A0E08"/>
+                  <!-- Eye roll - pupils up -->
+                  <ellipse cx="29" cy="38" rx="1.2" ry="1.2" fill="#1A0E08"/>
+                  <ellipse cx="41" cy="38" rx="1.2" ry="1.2" fill="#1A0E08"/>
+                  <!-- One eyebrow raised dramatically -->
+                  <path d="M26 34 Q29 31 32 34" stroke="#1A0E08" stroke-width="1.2" fill="none"/>
+                  <path d="M38 33 Q41 30 44 34" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
+                  <!-- Tight polite smile -->
+                  <path d="M29 49 Q35 51 41 49" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
                 </g>
               </g>
-              <!-- Handbag -->
-              <rect x="22" y="84" width="20" height="13" rx="4" fill="#8B1A3A"/>
-              <path d="M25 84 Q35 78 45 84" stroke="#8B1A3A" stroke-width="2" fill="none"/>
-              <!-- Earphones in pocket -->
-              <circle cx="52" cy="78" r="3" fill="white" stroke="#555" stroke-width="0.8"/>
+              <!-- Handbag on arm -->
+              <rect x="48" y="72" width="14" height="10" rx="3" fill="#8B1A3A"/>
+              <path d="M50 72 Q55 68 62 72" stroke="#8B1A3A" stroke-width="1.5" fill="none"/>
+              <!-- Arms -->
+              <path d="M20 66 L12 78" stroke="#C8845A" stroke-width="5" stroke-linecap="round"/>
+              <path d="M50 66 L54 72" stroke="#C8845A" stroke-width="5" stroke-linecap="round"/>
             </svg>
           </div>
           <span class="char-name">The Girl</span>
@@ -949,47 +1047,56 @@
           <div class="bubble-wrap"><div class="bubble" id="brother-b1">Didi ki shaadi jaldi ho jaaye</div><div class="bubble" id="brother-b2">Akela kamra mil jaayega finally</div></div>
           <div class="char-container">
             <svg class="char-svg" id="svg-brother" viewBox="0 0 70 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Shorts -->
-              <rect x="20" y="76" width="13" height="20" rx="4" fill="#444"/>
-              <rect x="37" y="76" width="13" height="20" rx="4" fill="#444"/>
+              <!-- Legs with sneakers -->
+              <rect x="22" y="78" width="11" height="24" rx="5" fill="#333"/>
+              <rect x="37" y="78" width="11" height="24" rx="5" fill="#333"/>
+              <ellipse cx="27" cy="102" rx="8" ry="4" fill="#E8E8E8"/>
+              <ellipse cx="42" cy="102" rx="8" ry="4" fill="#E8E8E8"/>
+              <rect x="20" y="98" width="14" height="3" rx="1.5" fill="#CC2222"/>
+              <rect x="35" y="98" width="14" height="3" rx="1.5" fill="#CC2222"/>
               <!-- Oversized tshirt -->
-              <rect x="13" y="52" width="44" height="28" rx="5" fill="#4A90D9"/>
-              <!-- Graphic -->
-              <circle cx="35" cy="66" r="7" fill="none" stroke="white" stroke-width="1.2"/>
-              <path d="M31 68 Q35 71 39 68" stroke="white" stroke-width="1.2" fill="none"/>
-              <g id="brother-head" style="transform-origin: 35px 41px;">
-                <ellipse cx="35" cy="41" rx="12" ry="13" fill="#C8845A"/>
-                <!-- Messy hair -->
-                <path d="M23 34 Q26 24 35 25 Q44 24 47 34" fill="#1A0E08"/>
-                <path d="M23 34 Q20 28 22 24" fill="#1A0E08"/>
-                <path d="M47 34 Q50 28 48 24" fill="#1A0E08"/>
-                <!-- Expression 1 - pretending to behave -->
+              <rect x="14" y="52" width="42" height="30" rx="5" fill="#4A90D9"/>
+              <!-- Graphic smiley -->
+              <circle cx="35" cy="67" r="6" fill="none" stroke="white" stroke-width="1.2"/>
+              <path d="M31 69 Q35 72 39 69" stroke="white" stroke-width="1.2" fill="none"/>
+              <circle cx="32" cy="65" r="1" fill="white"/>
+              <circle cx="38" cy="65" r="1" fill="white"/>
+              <g id="brother-head" style="transform-origin: 35px 40px;">
+                <ellipse cx="35" cy="40" rx="12" ry="13" fill="#C8845A"/>
+                <!-- Messy teenager hair -->
+                <path d="M23 33 Q26 22 35 23 Q44 22 47 33" fill="#1A0E08"/>
+                <path d="M23 33 Q19 26 21 22" fill="#1A0E08"/>
+                <path d="M47 33 Q51 26 49 22" fill="#1A0E08"/>
+                <!-- Cowlick -->
+                <path d="M35 23 Q38 18 36 15" stroke="#1A0E08" stroke-width="2" fill="none"/>
+                <!-- Expression 1 - sitting straight pretending -->
                 <g id="brother-expr1">
-                  <ellipse cx="29" cy="40" rx="2" ry="2" fill="#1A0E08"/>
-                  <ellipse cx="41" cy="40" rx="2" ry="2" fill="#1A0E08"/>
-                  <path d="M29 48 Q35 50 41 48" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
-                  <path d="M26 34 Q29 33 32 34" stroke="#1A0E08" stroke-width="1" fill="none"/>
-                  <path d="M38 34 Q41 33 44 34" stroke="#1A0E08" stroke-width="1" fill="none"/>
+                  <ellipse cx="29" cy="39" rx="2" ry="2" fill="#1A0E08"/>
+                  <ellipse cx="41" cy="39" rx="2" ry="2" fill="#1A0E08"/>
+                  <path d="M29 47 Q35 49 41 47" stroke="#1A0E08" stroke-width="1.5" fill="none"/>
+                  <path d="M26 33 Q29 32 32 33" stroke="#1A0E08" stroke-width="1" fill="none"/>
+                  <path d="M38 33 Q41 32 44 33" stroke="#1A0E08" stroke-width="1" fill="none"/>
                 </g>
-                <!-- Expression 2 - grinning at phone -->
+                <!-- Expression 2 - cannot contain grin, looking at phone -->
                 <g id="brother-expr2" style="display:none">
-                  <!-- Eyes looking down at phone, lit up -->
-                  <ellipse cx="29" cy="41" rx="2" ry="1.5" fill="#1A0E08"/>
-                  <ellipse cx="41" cy="41" rx="2" ry="1.5" fill="#1A0E08"/>
-                  <!-- Phone glow on face -->
-                  <ellipse cx="35" cy="41" rx="12" ry="13" fill="#A8D4F0" opacity="0.12"/>
-                  <!-- Big grin -->
-                  <path d="M27 48 Q35 55 43 48" stroke="#1A0E08" stroke-width="2" fill="none" stroke-linecap="round"/>
-                  <!-- Raised cheeks from smile -->
-                  <ellipse cx="26" cy="46" rx="3" ry="2" fill="#C07850" opacity="0.3"/>
-                  <ellipse cx="44" cy="46" rx="3" ry="2" fill="#C07850" opacity="0.3"/>
+                  <ellipse cx="29" cy="40" rx="2" ry="1.2" fill="#1A0E08"/>
+                  <ellipse cx="41" cy="40" rx="2" ry="1.2" fill="#1A0E08"/>
+                  <!-- Phone blue glow subtle -->
+                  <ellipse cx="35" cy="40" rx="12" ry="13" fill="#A8D4F0" opacity="0.1"/>
+                  <!-- Massive grin -->
+                  <path d="M27 47 Q35 54 43 47" stroke="#1A0E08" stroke-width="2" fill="none" stroke-linecap="round"/>
+                  <ellipse cx="26" cy="45" rx="3" ry="2" fill="#C07850" opacity="0.3"/>
+                  <ellipse cx="44" cy="45" rx="3" ry="2" fill="#C07850" opacity="0.3"/>
                 </g>
               </g>
-              <!-- Phone glowing -->
-              <rect x="44" y="60" width="13" height="20" rx="3" fill="#1A0E08"/>
-              <rect x="45" y="61" width="11" height="16" rx="2" fill="#A8D4F0"/>
-              <!-- Earphones -->
-              <path d="M22 52 Q35 47 44 52" stroke="white" stroke-width="1.2" fill="none"/>
+              <!-- Small properly sized phone in hand -->
+              <rect x="48" y="65" width="8" height="13" rx="2" fill="#1A0E08"/>
+              <rect x="49" y="66" width="6" height="10" rx="1" fill="#88CCEE"/>
+              <!-- Earphones cord -->
+              <path d="M20 55 Q27 50 35 52 Q42 50 48 55" stroke="white" stroke-width="1" fill="none" opacity="0.7"/>
+              <!-- Arms -->
+              <path d="M14 60 L7 72" stroke="#C8845A" stroke-width="5" stroke-linecap="round"/>
+              <path d="M56 60 L54 68" stroke="#C8845A" stroke-width="5" stroke-linecap="round"/>
             </svg>
           </div>
           <span class="char-name">Younger Bro</span>
@@ -1198,76 +1305,79 @@ function resetForm() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// BUBBLE + EXPRESSION + HEAD ANIMATION SYSTEM
+// SEQUENTIAL BUBBLE ANIMATION - one character at a time
 const characters = [
-  { id: 'mom', b1: 'mom-b1', b2: 'mom-b2', head: 'mom-head', e1: 'mom-expr1', e2: 'mom-expr2', delay: 0 },
-  { id: 'dad', b1: 'dad-b1', b2: 'dad-b2', head: 'dad-head', e1: 'dad-expr1', e2: 'dad-expr2', delay: 800 },
-  { id: 'boy', b1: 'boy-b1', b2: 'boy-b2', head: 'boy-head', e1: 'boy-expr1', e2: 'boy-expr2', delay: 1600 },
-  { id: 'bua', b1: 'bua-b1', b2: 'bua-b2', head: 'bua-head', e1: 'bua-expr1', e2: 'bua-expr2', delay: 2400 },
-  { id: 'dadiji', b1: 'dadiji-b1', b2: 'dadiji-b2', head: 'dadiji-head', e1: 'dadiji-expr1', e2: 'dadiji-expr2', delay: 400 },
-  { id: 'chacha', b1: 'chacha-b1', b2: 'chacha-b2', head: 'chacha-head', e1: 'chacha-expr1', e2: 'chacha-expr2', delay: 1200 },
-  { id: 'girlsmom', b1: 'girlsmom-b1', b2: 'girlsmom-b2', head: 'girlsmom-head', e1: 'girlsmom-expr1', e2: 'girlsmom-expr2', delay: 2000 },
-  { id: 'girl', b1: 'girl-b1', b2: 'girl-b2', head: 'girl-head', e1: 'girl-expr1', e2: 'girl-expr2', delay: 1000 },
-  { id: 'brother', b1: 'brother-b1', b2: 'brother-b2', head: 'brother-head', e1: 'brother-expr1', e2: 'brother-expr2', delay: 200 },
+  { id: 'mom',      b1: 'mom-b1',      b2: 'mom-b2',      head: 'mom-head',      e1: 'mom-expr1',      e2: 'mom-expr2' },
+  { id: 'dad',      b1: 'dad-b1',      b2: 'dad-b2',      head: 'dad-head',      e1: 'dad-expr1',      e2: 'dad-expr2' },
+  { id: 'boy',      b1: 'boy-b1',      b2: 'boy-b2',      head: 'boy-head',      e1: 'boy-expr1',      e2: 'boy-expr2' },
+  { id: 'bua',      b1: 'bua-b1',      b2: 'bua-b2',      head: 'bua-head',      e1: 'bua-expr1',      e2: 'bua-expr2' },
+  { id: 'dadiji',   b1: 'dadiji-b1',   b2: 'dadiji-b2',   head: 'dadiji-head',   e1: 'dadiji-expr1',   e2: 'dadiji-expr2' },
+  { id: 'chacha',   b1: 'chacha-b1',   b2: 'chacha-b2',   head: 'chacha-head',   e1: 'chacha-expr1',   e2: 'chacha-expr2' },
+  { id: 'girlsmom', b1: 'girlsmom-b1', b2: 'girlsmom-b2', head: 'girlsmom-head', e1: 'girlsmom-expr1', e2: 'girlsmom-expr2' },
+  { id: 'girl',     b1: 'girl-b1',     b2: 'girl-b2',     head: 'girl-head',     e1: 'girl-expr1',     e2: 'girl-expr2' },
+  { id: 'brother',  b1: 'brother-b1',  b2: 'brother-b2',  head: 'brother-head',  e1: 'brother-expr1',  e2: 'brother-expr2' },
 ];
 
-function nodHead(headEl, direction) {
-  if (!headEl) return;
-  const angle = direction === 'right' ? 8 : -8;
-  headEl.style.transition = 'transform 0.3s ease';
-  headEl.style.transform = 'rotate(' + angle + 'deg)';
-  setTimeout(() => {
-    headEl.style.transform = 'rotate(0deg)';
-  }, 350);
+let currentCharIndex = 0;
+let showingBubble2 = false;
+
+function nodHead(headId, direction) {
+  const el = document.getElementById(headId);
+  if (!el) return;
+  const angle = direction === 'right' ? 7 : -7;
+  el.style.transition = 'transform 0.25s ease';
+  el.style.transform = 'rotate(' + angle + 'deg)';
+  setTimeout(() => { el.style.transform = 'rotate(0deg)'; }, 300);
 }
 
-function switchExpression(char, showFirst) {
+function switchExpr(char, showFirst) {
   const e1 = document.getElementById(char.e1);
   const e2 = document.getElementById(char.e2);
-  if (!e1 || !e2) return;
-  if (showFirst) {
-    e1.style.display = 'block';
-    e2.style.display = 'none';
-  } else {
-    e1.style.display = 'none';
-    e2.style.display = 'block';
-  }
+  if (e1) e1.style.display = showFirst ? 'block' : 'none';
+  if (e2) e2.style.display = showFirst ? 'none' : 'block';
 }
 
-function animateCharacter(char) {
+function hideAllBubbles() {
+  characters.forEach(c => {
+    const b1 = document.getElementById(c.b1);
+    const b2 = document.getElementById(c.b2);
+    if (b1) b1.classList.remove('visible');
+    if (b2) b2.classList.remove('visible');
+    switchExpr(c, true);
+  });
+}
+
+function runSequence() {
+  hideAllBubbles();
+  const char = characters[currentCharIndex];
   const b1 = document.getElementById(char.b1);
   const b2 = document.getElementById(char.b2);
-  const headEl = document.getElementById(char.head);
 
-  const cycle = () => {
-    // Show bubble 1 with expression 1
-    b1.classList.add('visible');
-    b2.classList.remove('visible');
-    switchExpression(char, true);
-    nodHead(headEl, 'left');
+  // Show bubble 1 with expression 1
+  if (b1) b1.classList.add('visible');
+  switchExpr(char, true);
+  nodHead(char.head, 'left');
 
+  // After 2.8s switch to bubble 2
+  setTimeout(() => {
+    if (b1) b1.classList.remove('visible');
     setTimeout(() => {
-      b1.classList.remove('visible');
+      if (b2) b2.classList.add('visible');
+      switchExpr(char, false);
+      nodHead(char.head, 'right');
 
+      // After 2.8s move to next character
       setTimeout(() => {
-        // Show bubble 2 with expression 2
-        b2.classList.add('visible');
-        switchExpression(char, false);
-        nodHead(headEl, 'right');
-
-        setTimeout(() => {
-          b2.classList.remove('visible');
-          setTimeout(cycle, 500);
-        }, 3500);
-      }, 400);
-    }, 3500);
-  };
-
-  setTimeout(cycle, char.delay);
+        if (b2) b2.classList.remove('visible');
+        currentCharIndex = (currentCharIndex + 1) % characters.length;
+        setTimeout(runSequence, 300);
+      }, 2800);
+    }, 300);
+  }, 2800);
 }
 
-// Start all character animations
-characters.forEach(char => animateCharacter(char));
+// Start sequential animation after 1 second
+setTimeout(runSequence, 1000);
 </script>
 
 </body>

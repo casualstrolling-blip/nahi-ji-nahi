@@ -315,95 +315,113 @@
 
   /* MAIN FORM */
   .form-section {
-    max-width: 640px;
+    max-width: 660px;
     margin: 2.5rem auto 0;
     padding: 0 1rem;
   }
 
   .form-card {
     background: white;
-    border-radius: 20px;
-    border: 1px solid rgba(212,160,23,0.2);
-    padding: 2rem;
-    box-shadow: 0 4px 24px rgba(139,26,58,0.06);
+    border-radius: 24px;
+    border: 1.5px solid rgba(212,160,23,0.25);
+    padding: 2rem 2rem 1.5rem;
+    box-shadow: 0 8px 40px rgba(139,26,58,0.08);
   }
 
   .form-section-label {
-    font-size: 13px;
-    letter-spacing: 0.1em;
+    font-size: 11px;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--maroon);
-    margin-bottom: 12px;
-    display: block;
-    font-weight: 700;
+    color: var(--rose);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 800;
+  }
+
+  .form-section-label::before,
+  .form-section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(212,160,23,0.3);
   }
 
   /* SIDE TOGGLE */
   .side-toggle {
     display: flex;
-    gap: 8px;
-    margin-bottom: 1.5rem;
+    gap: 10px;
+    margin-bottom: 1.75rem;
+    background: var(--cream);
+    padding: 5px;
+    border-radius: 16px;
+    border: 1px solid rgba(212,160,23,0.2);
   }
 
   .side-btn {
     flex: 1;
-    padding: 11px;
-    border: 1.5px solid rgba(212,160,23,0.3);
+    padding: 13px;
+    border: none;
     border-radius: 12px;
     background: transparent;
     font-family: 'Nunito', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 15px;
+    font-weight: 700;
     color: var(--muted);
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.25s;
+    letter-spacing: 0.01em;
   }
 
   .side-btn.active {
     background: var(--maroon);
-    border-color: var(--maroon);
     color: white;
+    box-shadow: 0 4px 14px rgba(139,26,58,0.3);
+    transform: scale(1.02);
   }
 
   .side-btn:hover:not(.active) {
-    border-color: var(--rose);
-    color: var(--rose);
+    color: var(--maroon);
+    background: rgba(139,26,58,0.06);
   }
 
   /* TEXTAREA */
   .reason-input {
     width: 100%;
-    min-height: 90px;
-    border: 1.5px solid rgba(212,160,23,0.3);
-    border-radius: 12px;
-    padding: 14px;
+    min-height: 100px;
+    border: 2px solid rgba(212,160,23,0.25);
+    border-radius: 16px;
+    padding: 16px 18px;
     font-family: 'Nunito', sans-serif;
-    font-size: 16px;
+    font-size: 15px;
     color: var(--dark);
     background: var(--cream);
-    resize: vertical;
+    resize: none;
     outline: none;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-    transition: border-color 0.2s;
+    line-height: 1.7;
+    margin-bottom: 1.75rem;
+    transition: all 0.2s;
   }
 
   .reason-input:focus {
     border-color: var(--rose);
     background: white;
+    box-shadow: 0 0 0 4px rgba(201,64,112,0.08);
   }
 
   .reason-input::placeholder {
     color: #C4A882;
     font-style: italic;
-    font-weight: 300;
+    font-weight: 400;
+    font-size: 14px;
   }
 
   /* TONE SELECTOR */
   .tone-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 8px;
+    gap: 10px;
     margin-bottom: 1.75rem;
   }
 
@@ -420,37 +438,51 @@
 
   .tone-label {
     display: block;
-    padding: 10px 12px;
-    border: 1.5px solid rgba(212,160,23,0.25);
-    border-radius: 12px;
+    padding: 14px 14px 12px;
+    border: 2px solid rgba(212,160,23,0.2);
+    border-radius: 16px;
     cursor: pointer;
     transition: all 0.2s;
     background: var(--cream);
+    text-align: center;
+    height: 100%;
   }
 
   .tone-label:hover {
     border-color: var(--rose);
     background: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(139,26,58,0.1);
   }
 
   .tone-option input:checked + .tone-label {
     border-color: var(--rose);
-    background: white;
-    box-shadow: inset 0 0 0 1px var(--rose);
+    background: linear-gradient(135deg, #fff5f8, white);
+    box-shadow: 0 4px 20px rgba(201,64,112,0.15), inset 0 0 0 1px var(--rose);
+    transform: translateY(-2px);
+  }
+
+  .tone-emoji {
+    font-size: 28px;
+    display: block;
+    margin-bottom: 6px;
+    line-height: 1;
   }
 
   .tone-name {
-    font-size: 14px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 800;
     color: var(--maroon);
     display: block;
     margin-bottom: 4px;
+    line-height: 1.2;
   }
 
   .tone-desc {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--muted);
-    font-weight: 400;
+    font-weight: 500;
+    line-height: 1.4;
   }
 
   /* GENERATE BUTTON */
@@ -743,48 +775,52 @@
 <div class="form-section">
   <div class="form-card">
 
-    <span class="form-section-label">Who is doing the rejecting?</span>
+    <span class="form-section-label">Kaun kar raha hai reject?</span>
     <div class="side-toggle">
-      <button class="side-btn active" id="btn-boys" onclick="selectSide('boys')">👦 Boy's Side</button>
-      <button class="side-btn" id="btn-girls" onclick="selectSide('girls')">👧 Girl's Side</button>
+      <button class="side-btn active" id="btn-boys" onclick="selectSide('boys')">🤵 Ladke Wale</button>
+      <button class="side-btn" id="btn-girls" onclick="selectSide('girls')">👰 Ladki Wale</button>
     </div>
 
-    <span class="form-section-label">The real reason (be brutally honest)</span>
+    <span class="form-section-label">Asli wajah kya hai?</span>
     <textarea
       class="reason-input"
       id="reason-input"
-      placeholder="e.g. Uski mummy ne poora interview khud de diya... ya phir he looked nothing like his photo..."
+      placeholder="Sach bol do... jaise: uski mummy ne poora interview khud diya... ya woh photo mein alag, real life mein kuch aur tha... ya CTC poochh ke samosa khaya aur chale gaye 🫡"
       maxlength="400"
     ></textarea>
 
-    <span class="form-section-label">Choose your aunty's mood today</span>
+    <span class="form-section-label">Aunty ka mood aaj kaisa hai?</span>
     <div class="tone-grid">
       <div class="tone-option">
         <input type="radio" name="tone" id="tone1" value="mithi-churi" checked>
         <label class="tone-label" for="tone1">
-          <span class="tone-name">🗡️ Mithi Churi</span>
-          <span class="tone-desc">Brutal but polite. Hints at the reason, never names it.</span>
+          <span class="tone-emoji">🗡️</span>
+          <span class="tone-name">Mithi Churi</span>
+          <span class="tone-desc">Zyada meetha, thoda zeher. Reason hint karo, name mat karo.</span>
         </label>
       </div>
       <div class="tone-option">
         <input type="radio" name="tone" id="tone2" value="no-filter-aunty">
         <label class="tone-label" for="tone2">
-          <span class="tone-name">🔥 No Filter Aunty</span>
-          <span class="tone-desc">Seedhi baat, no bakwaas. Says it almost directly.</span>
+          <span class="tone-emoji">🔥</span>
+          <span class="tone-name">No Filter Aunty</span>
+          <span class="tone-desc">Seedhi baat, no bakwaas. Almost bol degi.</span>
         </label>
       </div>
       <div class="tone-option">
         <input type="radio" name="tone" id="tone3" value="dadi-ne-bola">
         <label class="tone-label" for="tone3">
-          <span class="tone-name">👵 Dadi Ne Bola</span>
-          <span class="tone-desc">Blame the elders. Nobody's fault. Hands are tied.</span>
+          <span class="tone-emoji">👵</span>
+          <span class="tone-name">Dadi Ne Bola</span>
+          <span class="tone-desc">Bade logon ka faisla. Hamare haath mein kuch nahi.</span>
         </label>
       </div>
       <div class="tone-option">
         <input type="radio" name="tone" id="tone4" value="abhi-nahi">
         <label class="tone-label" for="tone4">
-          <span class="tone-name">🚪 Abhi Nahi Shayad Kabhi Nahi</span>
-          <span class="tone-desc">Leave the door open. A maybe that means never.</span>
+          <span class="tone-emoji">🚪</span>
+          <span class="tone-name">Abhi Nahi Shayad Kabhi Nahi</span>
+          <span class="tone-desc">Darwaza khula hai. Thoda. Bas thoda.</span>
         </label>
       </div>
     </div>

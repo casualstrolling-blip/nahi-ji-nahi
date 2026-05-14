@@ -35,22 +35,14 @@
     position: relative;
   }
 
-  .header-decoration {
-    font-size: 13px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--rose);
-    margin-bottom: 0.75rem;
-    font-weight: 500;
-  }
-
   .header h1 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-size: clamp(2.8rem, 7vw, 5rem);
     font-weight: 700;
     color: var(--maroon);
     line-height: 1;
     letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
   }
 
   .header h1 em {
@@ -58,12 +50,22 @@
     color: var(--rose);
   }
 
+  .header-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: var(--rose);
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.01em;
+  }
+
   .header-tagline {
-    margin-top: 0.75rem;
-    font-size: 15px;
+    font-size: clamp(13px, 2vw, 16px);
     color: var(--muted);
-    font-weight: 300;
-    letter-spacing: 0.05em;
+    font-weight: 500;
+    font-family: 'Nunito', sans-serif;
+    letter-spacing: 0;
   }
 
   .divider {
@@ -651,9 +653,9 @@
 <body>
 
 <div class="header">
-  <div class="header-decoration">❧ Arranged Marriage ❧</div>
   <h1>Na <em>Ji</em> Na</h1>
-  <p class="header-tagline">The rejection generator for alliances that were never meant to be</p>
+  <p class="header-subtitle">A Marriage Rejection Generator</p>
+  <p class="header-tagline">For when the heart says no but the family says "kuch toh bol do."</p>
 </div>
 
 <div class="divider">

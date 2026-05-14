@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nahi Ji Nahi — Arranged Marriage Rejection Generator</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Hind:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --saffron: #E8A020;
+    --marigold: #F5C842;
+    --rose: #C94070;
+    --maroon: #8B1A3A;
+    --gold: #D4A017;
+    --cream: #FDF6EC;
+    --ivory: #FAF0E0;
+    --dark: #2C1810;
+    --muted: #6B4C3B;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Hind', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    padding: 3rem 1rem 1.5rem;
+    position: relative;
+  }
+
+  .header-decoration {
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+  }
+
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    color: var(--maroon);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .header h1 em {
+    font-style: italic;
+    color: var(--rose);
+  }
+
+  .header-tagline {
+    margin-top: 0.75rem;
+    font-size: 15px;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 1.5rem auto;
+  }
+
+  .divider-line {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.5;
+  }
+
+  .divider-diamond {
+    width: 8px;
+    height: 8px;
+    background: var(--rose);
+    transform: rotate(45deg);
+  }
+
+  /* SCENE */
+  .scene-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    position: relative;
+  }
+
+  .scene {
+    background: var(--ivory);
+    border-radius: 24px;
+    border: 1px solid rgba(212, 160, 23, 0.3);
+    padding: 2rem 1rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+    min-height: 220px;
+  }
+
+  .scene::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--maroon), var(--rose), var(--saffron), var(--marigold), var(--saffron), var(--rose), var(--maroon));
+  }
+
+  .scene-label {
+    position: absolute;
+    top: 14px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0.6;
+  }
+
+  .scene-label.left { left: 20px; }
+  .scene-label.right { right: 20px; }
+
+  .characters-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 8px;
+    padding-top: 1rem;
+  }
+
+  .side {
+    display: flex;
+    gap: 6px;
+    align-items: flex-end;
+  }
+
+  .side.boys { justify-content: flex-start; }
+  .side.girls { justify-content: flex-end; }
+
+  .scene-divider {
+    width: 1px;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent, rgba(212,160,23,0.3), transparent);
+    flex-shrink: 0;
+    align-self: center;
+  }
+
+  /* CHARACTERS */
+  .character {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+  }
+
+  .bubble-wrap {
+    position: relative;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bubble {
+    background: white;
+    border: 1.5px solid var(--gold);
+    border-radius: 12px;
+    padding: 5px 9px;
+    font-size: 9.5px;
+    font-family: 'Hind', sans-serif;
+    font-weight: 500;
+    color: var(--dark);
+    text-align: center;
+    max-width: 95px;
+    line-height: 1.3;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(139,26,58,0.08);
+  }
+
+  .bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 7px solid var(--gold);
+  }
+
+  .bubble::before {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid white;
+    z-index: 1;
+  }
+
+  .bubble.visible { opacity: 1; }
+
+  /* SVG CHARACTERS */
+  .char-svg {
+    width: 52px;
+    height: 80px;
+  }
+
+  .char-name {
+    font-size: 8.5px;
+    color: var(--muted);
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    opacity: 0.7;
+  }
+
+  /* MAIN FORM */
+  .form-section {
+    max-width: 640px;
+    margin: 2.5rem auto 0;
+    padding: 0 1rem;
+  }
+
+  .form-card {
+    background: white;
+    border-radius: 20px;
+    border: 1px solid rgba(212,160,23,0.2);
+    padding: 2rem;
+    box-shadow: 0 4px 24px rgba(139,26,58,0.06);
+  }
+
+  .form-section-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+    display: block;
+    font-weight: 500;
+  }
+
+  /* SIDE TOGGLE */
+  .side-toggle {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+  }
+
+  .side-btn {
+    flex: 1;
+    padding: 11px;
+    border: 1.5px solid rgba(212,160,23,0.3);
+    border-radius: 12px;
+    background: transparent;
+    font-family: 'Hind', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .side-btn.active {
+    background: var(--maroon);
+    border-color: var(--maroon);
+    color: white;
+  }
+
+  .side-btn:hover:not(.active) {
+    border-color: var(--rose);
+    color: var(--rose);
+  }
+
+  /* TEXTAREA */
+  .reason-input {
+    width: 100%;
+    min-height: 90px;
+    border: 1.5px solid rgba(212,160,23,0.3);
+    border-radius: 12px;
+    padding: 14px;
+    font-family: 'Hind', sans-serif;
+    font-size: 14px;
+    color: var(--dark);
+    background: var(--cream);
+    resize: vertical;
+    outline: none;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    transition: border-color 0.2s;
+  }
+
+  .reason-input:focus {
+    border-color: var(--rose);
+    background: white;
+  }
+
+  .reason-input::placeholder {
+    color: #C4A882;
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  /* TONE SELECTOR */
+  .tone-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 1.75rem;
+  }
+
+  .tone-option {
+    position: relative;
+  }
+
+  .tone-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .tone-label {
+    display: block;
+    padding: 10px 12px;
+    border: 1.5px solid rgba(212,160,23,0.25);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--cream);
+  }
+
+  .tone-label:hover {
+    border-color: var(--rose);
+    background: white;
+  }
+
+  .tone-option input:checked + .tone-label {
+    border-color: var(--rose);
+    background: white;
+    box-shadow: inset 0 0 0 1px var(--rose);
+  }
+
+  .tone-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--maroon);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .tone-desc {
+    font-size: 10px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* GENERATE BUTTON */
+  .generate-btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--maroon);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-style: italic;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+
+  .generate-btn:hover {
+    background: var(--rose);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(139,26,58,0.25);
+  }
+
+  .generate-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* OUTPUT */
+  .output-section {
+    max-width: 640px;
+    margin: 1.5rem auto 0;
+    padding: 0 1rem;
+    display: none;
+  }
+
+  .output-section.visible { display: block; }
+
+  .output-card {
+    background: white;
+    border-radius: 20px;
+    border: 1px solid rgba(212,160,23,0.2);
+    padding: 2rem;
+    box-shadow: 0 4px 24px rgba(139,26,58,0.06);
+  }
+
+  .output-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .output-eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(212,160,23,0.2);
+  }
+
+  .real-reason {
+    background: var(--cream);
+    border-left: 3px solid var(--rose);
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 1.25rem;
+  }
+
+  .aunty-output {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--dark);
+    font-weight: 400;
+  }
+
+  .aunty-output p { margin-bottom: 1rem; }
+  .aunty-output p:last-child { margin-bottom: 0; }
+
+  .output-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.25rem;
+    gap: 8px;
+  }
+
+  .action-btn {
+    font-family: 'Hind', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid rgba(212,160,23,0.3);
+    border-radius: 8px;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-weight: 500;
+  }
+
+  .action-btn:hover {
+    color: var(--maroon);
+    border-color: var(--maroon);
+  }
+
+  /* LOADING */
+  .loading-dots {
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .loading-dots span {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: white;
+    animation: bounce 1.2s infinite;
+  }
+
+  .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes bounce {
+    0%, 80%, 100% { transform: scale(0.7); opacity: 0.5; }
+    40% { transform: scale(1); opacity: 1; }
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 3rem 1rem 2rem;
+    font-size: 12px;
+    color: var(--muted);
+    opacity: 0.6;
+    font-weight: 300;
+  }
+
+  /* MARIGOLD DECORATION */
+  .marigold-row {
+    text-align: center;
+    font-size: 18px;
+    padding: 0.5rem;
+    letter-spacing: 0.3em;
+    opacity: 0.4;
+  }
+
+  @media (max-width: 600px) {
+    .tone-grid { grid-template-columns: 1fr; }
+    .char-svg { width: 40px; height: 64px; }
+    .bubble { font-size: 8.5px; max-width: 78px; }
+    .scene { padding: 1.5rem 0.5rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-decoration">❧ Arranged Marriage ❧</div>
+  <h1>Nahi <em>Ji</em> Nahi</h1>
+  <p class="header-tagline">The rejection generator for alliances that were never meant to be</p>
+</div>
+
+<div class="divider">
+  <div class="divider-line"></div>
+  <div class="divider-diamond"></div>
+  <div class="divider-line"></div>
+</div>
+
+<div class="marigold-row">🌼 🌸 🌼 🌸 🌼</div>
+
+<!-- ANIMATED SCENE -->
+<div class="scene-wrapper">
+  <div class="scene">
+    <span class="scene-label left">Boy's Side</span>
+    <span class="scene-label right">Girl's Side</span>
+
+    <div class="characters-row">
+
+      <!-- BOY'S SIDE -->
+      <div class="side boys">
+
+        <!-- MOM -->
+        <div class="character" id="char-mom">
+          <div class="bubble-wrap">
+            <div class="bubble" id="mom-b1">Mera beta bahut independent hai</div>
+            <div class="bubble" id="mom-b2">Uska dabba maine pack kiya aaj bhi</div>
+          </div>
+          <svg class="char-svg" viewBox="0 0 52 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Body -->
+            <ellipse cx="26" cy="58" rx="14" ry="18" fill="#C94070"/>
+            <!-- Saree drape suggestion -->
+            <ellipse cx="26" cy="58" rx="14" ry="18" fill="#8B1A3A" opacity="0.2"/>
+            <!-- Gold border -->
+            <rect x="12" y="72" width="28" height="3" rx="1.5" fill="#D4A017"/>
+            <!-- Torso -->
+            <rect x="18" y="42" width="16" height="16" rx="3" fill="#E8A020"/>
+            <!-- Head -->
+            <ellipse cx="26" cy="32" rx="10" ry="11" fill="#D4845A"/>
+            <!-- Hair bun -->
+            <ellipse cx="26" cy="20" rx="7" ry="5" fill="#2C1810"/>
+            <circle cx="26" cy="17" r="4" fill="#2C1810"/>
+            <!-- Bindi -->
+            <circle cx="26" cy="27" r="1.5" fill="#C94070"/>
+            <!-- Eyes -->
+            <ellipse cx="22" cy="31" rx="1.5" ry="1.5" fill="#2C1810"/>
+            <ellipse cx="30" cy="31" rx="1.5" ry="1.5" fill="#2C1810"/>
+            <!-- Smile - authoritative -->
+            <path d="M22 36 Q26 38 30 36" stroke="#2C1810" stroke-width="1" fill="none"/>
+            <!-- Chai cup -->
+            <rect x="36" y="50" width="10" height="8" rx="2" fill="#F5C842"/>
+            <path d="M46 53 Q50 53 50 57 Q50 61 46 61" stroke="#D4A017" stroke-width="1.5" fill="none"/>
+            <!-- Arms -->
+            <path d="M18 48 L12 55" stroke="#D4845A" stroke-width="4" stroke-linecap="round"/>
+            <path d="M34 48 L38 52" stroke="#D4845A" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          <span class="char-name">Mom</span>
+        </div>
+
+        <!-- DAD -->
+        <div class="character" id="char-dad">
+          <div class="bubble-wrap">
+            <div class="bubble" id="dad-b1">Beta ki khushi mein humari khushi</div>
+            <div class="bubble" id="dad-b2">Bas nipat jaaye ek baar</div>
+          </div>
+          <svg class="char-svg" viewBox="0 0 52 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Kurta -->
+            <rect x="14" y="40" width="24" height="36" rx="4" fill="#E8A020"/>
+            <!-- Collar -->
+            <path d="M22 40 L26 46 L30 40" fill="#FDF6EC"/>
+            <!-- Head -->
+            <ellipse cx="26" cy="30" rx="10" ry="11" fill="#C4845A"/>
+            <!-- Hair - thinning -->
+            <path d="M16 24 Q20 19 26 19 Q32 19 36 24" fill="#2C1810"/>
+            <!-- Moustache -->
+            <path d="M21 33 Q26 35 31 33" stroke="#2C1810" stroke-width="1.5" fill="none"/>
+            <!-- Eyes - half closed -->
+            <ellipse cx="22" cy="29" rx="1.5" ry="1" fill="#2C1810"/>
+            <ellipse cx="30" cy="29" rx="1.5" ry="1" fill="#2C1810"/>
+            <!-- Neutral expression -->
+            <path d="M23 35 Q26 35.5 29 35" stroke="#2C1810" stroke-width="1" fill="none"/>
+            <!-- Arms slightly away from body -->
+            <path d="M14 46 L8 58" stroke="#C4845A" stroke-width="4" stroke-linecap="round"/>
+            <path d="M38 46 L42 52" stroke="#C4845A" stroke-width="4" stroke-linecap="round"/>
+            <!-- Pyjama -->
+            <rect x="16" y="60" width="8" height="18" rx="3" fill="#FDF6EC"/>
+            <rect x="28" y="60" width="8" height="18" rx="3" fill="#FDF6EC"/>
+          </svg>
+          <span class="char-name">Dad</span>
+        </div>
+
+        <!-- BOY -->
+        <div class="character" id="char-boy">
+          <div class="bubble-wrap">
+            <div class="bubble" id="boy-b1">Pehli baar dekh raha hoon aaj</div>
+            <div class="bubble" id="boy-b2">Insta pe 2 ghante stalk kiya tha kal raat</div>
+          </div>
+          <svg class="char-svg" viewBox="0 0 52 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Trousers -->
+            <rect x="16" y="56" width="8" height="22" rx="3" fill="#2C1810"/>
+            <rect x="28" y="56" width="8" height="22" rx="3" fill="#2C1810"/>
+            <!-- Shirt - light blue -->
+            <rect x="13" y="38" width="26" height="22" rx="4" fill="#A8C4E0"/>
+            <!-- Collar -->
+            <path d="M21 38 L26 43 L31 38" fill="white"/>
+            <!-- Buttons -->
+            <circle cx="26" cy="47" r="1" fill="#8BA8C4"/>
+            <circle cx="26" cy="52" r="1" fill="#8BA8C4"/>
+            <!-- Head -->
+            <ellipse cx="26" cy="28" rx="10" ry="11" fill="#C4845A"/>
+            <!-- Hair - suspiciously combed -->
+            <path d="M16 22 Q26 16 36 22" fill="#2C1810"/>
+            <!-- Eyes - nervous -->
+            <ellipse cx="22" cy="28" rx="1.5" ry="1.5" fill="#2C1810"/>
+            <ellipse cx="30" cy="28" rx="1.5" ry="1.5" fill="#2C1810"/>
+            <!-- Nervous smile -->
+            <path d="M22 33 Q26 36 30 33" stroke="#2C1810" stroke-width="1" fill="none"/>
+            <!-- Phone hidden behind back -->
+            <rect x="38" y="48" width="7" height="11" rx="2" fill="#555" opacity="0.6"/>
+            <!-- Arms -->
+            <path d="M13 44 L7 54" stroke="#C4845A" stroke-width="4" stroke-linecap="round"/>
+            <path d="M39 44 L42 50" stroke="#C4845A" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          <span class="char-name">The Boy</span>
+        </div>
+
+        <!-- BUA -->
+        <div class="character" id="char-bua">
+          <div class="bubble-wrap">
+            <div class="bubble" id="bua-b1">Haan dekhte hain</div>
+            <div class="bubble" id="bua-b2">Mujhe toh pehle din se pata tha — nahi hoga</div>
+          </div>
+          <svg class="char-svg" viewBox="0 0 52 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Saree - turmeric -->
+            <ellipse cx="26" cy="60" rx="13" ry="17" fill="#E8A020"/>
+            <rect x="13" y="70" width="26" height="3" rx="1.5" fill="#8B1A3A"/>
+            <!-- Arms crossed -->
+            <path d="M13 50 Q20 46 26 48 Q32 46 39 50" stroke="#C4845A" stroke-width="5" stroke-linecap="round" fill="none"/>
+            <!-- Chai cup on crossed arms -->
+            <rect x="20" y="44" width="8" height="6" rx="1.5" fill="#F5C842"/>
+            <!-- Head -->
+            <ellipse cx="26" cy="30" rx="10" ry="11" fill="#C4845A"/>
+            <!-- Hair bun - older -->
+            <ellipse cx="26" cy="19" rx="8" ry="5" fill="#888"/>
+            <circle cx="26" cy="16" r="4" fill="#888"/>
+            <!-- One eyebrow raised HIGH -->
+            <path d="M19 24 Q22 21 25 23" stroke="#2C1810" stroke-width="1.5" fill="none"/>
+            <path d="M27 26 Q30 25 33 26" stroke="#2C1810" stroke-width="1" fill="none"/>
+            <!-- Eyes - judging -->
+            <ellipse cx="22" cy="28" rx="1.5" ry="1.2" fill="#2C1810"/>
+            <ellipse cx="30" cy="28" rx="1.5" ry="1.5" fill="#2C1810"/>
+            <!-- Thin disapproving line for mouth -->
+            <path d="M22 34 Q26 33 30 34" stroke="#2C1810" stroke-width="1" fill="none"/>
+          </svg>
+          <span class="char-name">Bua</span>
+        </div>
+
+      </div>
+
+      <div class="scene-divider"></div>
+
+      <!-- GIRL'S SIDE -->
+      <div class="side girls">
+
+        <!-- DADIJI -->
+        <div class="character" id="char-dadiji">
+          <div class="bubble-wrap">
+            <div class="bubble" id="dadiji-b1">Ladki bahut achhi lagi humein</div>
+            <div class="bubble" id="dadiji-b2">Rang thoda aur saaf hota toh...</div>
+          </div>
+          <svg class="char-svg" viewBox="0 0 52 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Cotton saree - ivory -->
+            <ellipse cx="26" cy="62" rx="11" ry="15" fill="#FAF0E0"/>
+            <rect x="15" y="72" width="22" height="3" rx="1.5" fill="#E8A020"/>
+            <!-- Small frame -->
+            <!-- Head - smaller -->
+            <ellipse cx="26" cy="33" rx="9" ry="10" fill="#C4845A"/>
+            <!-- Enormous white bun -->
+            <circle cx="26" cy="21" r="8" fill="white" stroke="#ddd" stroke-width="1"/>
+            <ellipse cx="26" cy="17" rx="6" ry="4" fill="white"/>
+            <!-- Thick round glasses -->
+            <circle cx="21" cy="33" r="4" fill="none" stroke="#8B1A3A" stroke-width="1.5"/>
+            <circle cx="31" cy="33" r="4" fill="none" stroke="#8B1A3A" stroke-width="1.5"/>
+            <path d="M25 33 L27 33" stroke="#8B1A3A" stroke-width="1.5"/>
+            <path d="M17 33 L15 32" stroke="#8B1A3A" stroke-width="1.5"/>
+            <path d="M35 33 L37 32" stroke="#8B1A3A" stroke-width="1.5"/>
+            <!-- Eyes -->
+            <ellipse cx="21" cy="33" rx="1.5" ry="1.5" fill="#2C1810"/>
+            <ellipse cx="31" cy="33" rx="1.5" ry="1.5" fill="#2C1810"/>
+            <!-- Mouth - thin decisive line -->
+            <path d="M22 39 Q26 40 30 39" stroke="#2C1810" stroke-width="1" fill="none"/>
+            <!-- Hands folded in lap -->
+            <path d="M19 56 Q26 53 33 56" stroke="#C4845A" stroke-width="4" stroke-linecap="round" fill="none"/>
+            <!-- Walking stick -->
+            <path d="M36 48 L38 78" stroke="#8B6914" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="37" cy="48" r="3" fill="#C94070"/>
+          </svg>
+          <span class="char-name">Dadiji</span>
+        </div>
+
+        <!-- CHACHA -->
+        <div class="character" id="char-chacha">
+          <div class="bubble-wrap">
+            <div class="bubble" id="chacha-b1">Bas bhanji theek rahe</div>
+            <div class="bubble" id="chacha-b2">Package kitna hai beta — exact figure</div>
+          </div>
+          <svg class="char-svg" viewBox="0 0 52 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Rotund body - shirt straining -->
+            <ellipse cx="26" cy="56" rx="16" ry="20" fill="#E8A020"/>
+            <!-- Shirt buttons straining -->
+            <circle cx="26" cy="48" r="1" fill="#C47A15"/>
+            <circle cx="26" cy="53" r="1" fill="#C47A15"/>
+            <circle cx="26" cy="58" r="1" fill="#C47A15"/>
+            <!-- Head -->
+            <ellipse cx="26" cy="29" rx="11" ry="11" fill="#C4845A"/>
+            <!-- Magnificent moustache -->
+            <path d="M18 34 Q22 37 26 35 Q30 37 34 34" fill="#2C1810"/>
+            <!-- Eyes - aggressive -->
+            <ellipse cx="21" cy="28" rx="2" ry="1.5" fill="#2C1810"/>
+            <ellipse cx="31" cy="28" rx="2" ry="1.5" fill="#2C1810"/>
+            <!-- Eyebrows furrowed -->
+            <path d="M18 24 Q21 22 24 24" stroke="#2C1810" stroke-width="1.5" fill="none"/>
+            <path d="M28 24 Q31 22 34 24" stroke="#2C1810" stroke-width="1.5" fill="none"/>
+            <!-- Pointing finger - aggressive -->
+            <path d="M38 44 L48 38" stroke="#C4845A" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="49" cy="37" r="2.5" fill="#C4845A"/>
+            <!-- Samosa in other hand -->
+            <path d="M6 52 L14 44 L18 52 Z" fill="#F5C842"/>
+            <path d="M10 50 Q12 47 14 50" stroke="#E8A020" stroke-width="1" fill="none"/>
+          </svg>
+          <span class="char-name">Chacha</span>
+        </div>
+
+        <!-- GIRL'S MOM -->
+        <div class="character" id="char-girlsmom">
+          <div class="bubble-wrap">
+            <div class="bubble" id="girlsmom-b1">Humari beti bahut simple hai</div>
+            <div class="bubble" id="girlsmom-b2">Usne 47 rishte reject kiye hain</div>
+          </div>
+          <svg class="char-svg" viewBox="0 0 52 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Saree - deep red -->
+            <ellipse cx="26" cy="58" rx="14" ry="18" fill="#8B1A3A"/>
+            <rect x="12" y="72" width="28" height="3" rx="1.5" fill="#D4A017"/>
+            <!-- Head -->
+            <ellipse cx="26" cy="30" rx="10" ry="11" fill="#C4845A"/>
+            <!-- Hair - neat -->
+            <path d="M16 24 Q26 18 36 24" fill="#2C1810"/>
+            <!-- Reading glasses -->
+            <ellipse cx="21" cy="30" rx="3.5" ry="2.5" fill="none" stroke="#2C1810" stroke-width="1"/>
+            <ellipse cx="31" cy="30" rx="3.5" ry="2.5" fill="none" stroke="#2C1810" stroke-width="1"/>
+            <path d="M24.5 30 L27.5 30" stroke="#2C1810" stroke-width="1"/>
+            <!-- Eyes -->
+            <ellipse cx="21" cy="30" rx="1.2" ry="1.2" fill="#2C1810"/>
+            <ellipse cx="31" cy="30" rx="1.2" ry="1.2" fill="#2C1810"/>
+            <!-- Determined mouth -->
+            <path d="M22 36 Q26 37 30 36" stroke="#2C1810" stroke-width="1" fill="none"/>
+            <!-- Long list in one hand -->
+            <rect x="4" y="44" width="8" height="22" rx="1" fill="white" stroke="#D4A017" stroke-width="0.5"/>
+            <path d="M5 47 L11 47" stroke="#8B1A3A" stroke-width="0.5"/>
+            <path d="M5 49 L11 49" stroke="#8B1A3A" stroke-width="0.5"/>
+            <path d="M5 51 L11 51" stroke="#8B1A3A" stroke-width="0.5"/>
+            <path d="M5 53 L9 53" stroke="#8B1A3A" stroke-width="0.5"/>
+            <!-- Pen in other hand -->
+            <rect x="38" y="42" width="2.5" height="14" rx="1" fill="#2C1810"/>
+            <!-- Arms -->
+            <path d="M12 46 L8 55" stroke="#C4845A" stroke-width="4" stroke-linecap="round"/>
+            <path d="M40 46 L40 50" stroke="#C4845A" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          <span class="char-name">Girl's Mom</span>
+        </div>
+
+        <!-- THE GIRL -->
+        <div class="character" id="char-girl">
+          <div class="bubble-wrap">
+            <div class="bubble" id="girl-b1">Ladka theek lag raha hai</div>
+            <div class="bubble" id="girl-b2">Uski mummy nahi lag rahi theek</div>
+          </div>
+          <svg class="char-svg" viewBox="0 0 52 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Salwar kameez - rose gold -->
+            <ellipse cx="26" cy="58" rx="13" ry="19" fill="#E8906A"/>
+            <!-- Dupatta perfectly placed -->
+            <path d="M13 42 Q26 38 39 42 Q36 50 26 52 Q16 50 13 42Z" fill="#D4A017" opacity="0.7"/>
+            <!-- Embroidery detail -->
+            <circle cx="20" cy="45" r="1" fill="#8B1A3A"/>
+            <circle cx="26" cy="43" r="1" fill="#8B1A3A"/>
+            <circle cx="32" cy="45" r="1" fill="#8B1A3A"/>
+            <!-- Head -->
+            <ellipse cx="26" cy="28" rx="10" ry="11" fill="#C4845A"/>
+            <!-- Hair - long, neat -->
+            <path d="M16 24 Q26 18 36 24 L38 45 Q26 48 14 45Z" fill="#2C1810"/>
+            <!-- Eyes - knowing -->
+            <ellipse cx="22" cy="28" rx="1.5" ry="1.5" fill="#2C1810"/>
+            <ellipse cx="30" cy="28" rx="1.5" ry="1.5" fill="#2C1810"/>
+            <!-- One eyebrow slightly raised -->
+            <path d="M19 23 Q22 21 25 22" stroke="#2C1810" stroke-width="1" fill="none"/>
+            <path d="M27 22 Q30 22 33 23" stroke="#2C1810" stroke-width="1" fill="none"/>
+            <!-- Polite smile - doing a lot of work -->
+            <path d="M22 33 Q26 36 30 33" stroke="#2C1810" stroke-width="1" fill="none"/>
+            <!-- Small handbag on lap -->
+            <rect x="18" y="62" width="16" height="10" rx="3" fill="#8B1A3A"/>
+            <path d="M21 62 Q26 58 31 62" stroke="#8B1A3A" stroke-width="1.5" fill="none"/>
+            <!-- Earphones stuffed in pocket -->
+            <circle cx="38" cy="56" r="2" fill="white" stroke="#555" stroke-width="0.5"/>
+          </svg>
+          <span class="char-name">The Girl</span>
+        </div>
+
+        <!-- YOUNGER BROTHER -->
+        <div class="character" id="char-brother">
+          <div class="bubble-wrap">
+            <div class="bubble" id="brother-b1">Didi ki shaadi jaldi ho jaaye</div>
+            <div class="bubble" id="brother-b2">Akela kamra mil jaayega finally</div>
+          </div>
+          <svg class="char-svg" viewBox="0 0 52 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Shorts -->
+            <rect x="16" y="56" width="8" height="14" rx="3" fill="#555"/>
+            <rect x="28" y="56" width="8" height="14" rx="3" fill="#555"/>
+            <!-- Oversized tshirt -->
+            <rect x="11" y="38" width="30" height="22" rx="4" fill="#4A90D9"/>
+            <!-- Graphic on tshirt - simple smile -->
+            <circle cx="26" cy="50" r="5" fill="none" stroke="white" stroke-width="1"/>
+            <path d="M23 52 Q26 54 29 52" stroke="white" stroke-width="1" fill="none"/>
+            <!-- Sitting sideways suggestion -->
+            <!-- Head -->
+            <ellipse cx="26" cy="28" rx="9" ry="10" fill="#C4845A"/>
+            <!-- Hair - messy teenager -->
+            <path d="M17 24 Q20 18 26 19 Q32 18 35 24" fill="#2C1810"/>
+            <path d="M17 24 Q15 20 17 18" fill="#2C1810"/>
+            <!-- Face lit by phone - slight glow -->
+            <ellipse cx="26" cy="28" rx="9" ry="10" fill="#A8D4F0" opacity="0.15"/>
+            <!-- Eyes - amused, looking down at phone -->
+            <ellipse cx="22" cy="29" rx="1.5" ry="1" fill="#2C1810"/>
+            <ellipse cx="30" cy="29" rx="1.5" ry="1" fill="#2C1810"/>
+            <!-- Grin -->
+            <path d="M21 34 Q26 38 31 34" stroke="#2C1810" stroke-width="1.5" fill="none"/>
+            <!-- Phone in hand - glowing -->
+            <rect x="32" y="44" width="10" height="16" rx="2" fill="#2C1810"/>
+            <rect x="33" y="45" width="8" height="12" rx="1" fill="#A8D4F0"/>
+            <!-- Earphones around neck -->
+            <path d="M18 38 Q26 35 34 38" stroke="white" stroke-width="1" fill="none"/>
+            <!-- Arms -->
+            <path d="M11 44 L7 54" stroke="#C4845A" stroke-width="4" stroke-linecap="round"/>
+            <path d="M41 44 L38 52" stroke="#C4845A" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          <span class="char-name">Younger Bro</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider" style="margin-top: 2rem;">
+  <div class="divider-line"></div>
+  <div class="divider-diamond"></div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- FORM -->
+<div class="form-section">
+  <div class="form-card">
+
+    <span class="form-section-label">Who is doing the rejecting?</span>
+    <div class="side-toggle">
+      <button class="side-btn active" id="btn-boys" onclick="selectSide('boys')">👦 Boy's Side</button>
+      <button class="side-btn" id="btn-girls" onclick="selectSide('girls')">👧 Girl's Side</button>
+    </div>
+
+    <span class="form-section-label">The real reason (be brutally honest)</span>
+    <textarea
+      class="reason-input"
+      id="reason-input"
+      placeholder="e.g. Uski mummy ne poora interview khud de diya... ya phir he looked nothing like his photo..."
+      maxlength="400"
+    ></textarea>
+
+    <span class="form-section-label">Choose your aunty's mood today</span>
+    <div class="tone-grid">
+      <div class="tone-option">
+        <input type="radio" name="tone" id="tone1" value="mithi-churi" checked>
+        <label class="tone-label" for="tone1">
+          <span class="tone-name">🗡️ Mithi Churi</span>
+          <span class="tone-desc">Brutal but polite. Hints at the reason, never names it.</span>
+        </label>
+      </div>
+      <div class="tone-option">
+        <input type="radio" name="tone" id="tone2" value="no-filter-aunty">
+        <label class="tone-label" for="tone2">
+          <span class="tone-name">🔥 No Filter Aunty</span>
+          <span class="tone-desc">Seedhi baat, no bakwaas. Says it almost directly.</span>
+        </label>
+      </div>
+      <div class="tone-option">
+        <input type="radio" name="tone" id="tone3" value="dadi-ne-bola">
+        <label class="tone-label" for="tone3">
+          <span class="tone-name">👵 Dadi Ne Bola</span>
+          <span class="tone-desc">Blame the elders. Nobody's fault. Hands are tied.</span>
+        </label>
+      </div>
+      <div class="tone-option">
+        <input type="radio" name="tone" id="tone4" value="abhi-nahi">
+        <label class="tone-label" for="tone4">
+          <span class="tone-name">🚪 Abhi Nahi Shayad Kabhi Nahi</span>
+          <span class="tone-desc">Leave the door open. A maybe that means never.</span>
+        </label>
+      </div>
+    </div>
+
+    <button class="generate-btn" id="generate-btn" onclick="generateRejection()">
+      Rejection likho, aunty style mein ✦
+    </button>
+
+  </div>
+</div>
+
+<!-- OUTPUT -->
+<div class="output-section" id="output-section">
+  <div class="output-card">
+    <div class="output-eyebrow">Aunty ka jawab</div>
+    <div class="real-reason" id="real-reason-display"></div>
+    <div class="aunty-output" id="aunty-output"></div>
+    <div class="output-actions">
+      <button class="action-btn" onclick="copyOutput()">Copy karo</button>
+      <button class="action-btn" onclick="resetForm()">Dobara try karo</button>
+    </div>
+  </div>
+</div>
+
+<div class="marigold-row" style="margin-top: 2rem;">🌸 🌼 🌸 🌼 🌸</div>
+
+<div class="footer">
+  Nahi Ji Nahi &nbsp;·&nbsp; Koi alliance permanently close nahi hoti, bas "dekhte hain" hoti hai
+</div>
+
+<script>
+let selectedSide = 'boys';
+
+function selectSide(side) {
+  selectedSide = side;
+  document.getElementById('btn-boys').classList.toggle('active', side === 'boys');
+  document.getElementById('btn-girls').classList.toggle('active', side === 'girls');
+}
+
+const tonePrompts = {
+  'mithi-churi': `You are a senior Indian family member writing a formal arranged marriage rejection message. 
+Tone: Warm, polished, devastating in its vagueness. Never name the real reason directly — only hint at it so the reader recognises it without you having to say it. 
+Style: Two paragraphs. Pure text. No salutations. No bold. The first paragraph praises the other party genuinely. The second paragraph delivers the rejection through beautiful vagueness. 
+Rules: No religious references. Vary your opening every time. Sound like an Indian family aunty. Mix formal English with occasional Hinglish. The fingerprint of the real reason must be present but never named directly. IMPORTANT: Keep each paragraph to 2-3 sentences maximum. Short, warm, devastating. Never stop mid sentence.`,
+
+  'no-filter-aunty': `You are a senior Indian family member writing a formal arranged marriage rejection — but today you are unusually direct. 
+Tone: Still respectful, still warm, but you almost say the actual reason. You stop just short of full brutality. Hinglish mix is natural here.
+Style: Two paragraphs. Pure text. No salutations. No bold. First paragraph — genuine praise. Second paragraph — comes very close to naming the real reason, wraps it in just enough politeness to remain dignified.
+Rules: No religious references. Vary your opening every time. Sound real. The real reason should be almost visible through the polite language. Mix English and Hinglish naturally — phrases like "seedhi baat karein toh", "lekin kya karein", "thoda bahut toh chalta hai".`,
+
+  'dadi-ne-bola': `You are a senior Indian family member writing a formal arranged marriage rejection where the decision has been made by the elders and you are simply the messenger.
+Tone: Regretful, helpless, blaming the older generation entirely. You personally have no objection. Dadi/dadaji/bade log have spoken.
+Style: Two paragraphs. Pure text. No salutations. No bold. First paragraph — sincere praise and warmth. Second paragraph — the elders decided, hands are tied, nothing to be done.
+Rules: No religious references. Vary your opening. The real reason is completely hidden — replaced entirely by "our elders had certain feelings". Sound genuinely apologetic for something that is entirely out of your hands.`,
+
+  'abhi-nahi': `You are a senior Indian family member writing an arranged marriage rejection that leaves the door technically open — but everyone understands it will never open.
+Tone: Warm, hopeful-sounding, but the rejection is complete. "Maybe later" energy that both parties understand means never.
+Style: Two paragraphs. Pure text. No salutations. No bold. First paragraph — genuine warmth and praise. Second paragraph — timing, circumstances, let things settle — the door is ajar but nobody is walking through it.
+Rules: No religious references. Vary your opening. Include phrases like "abhi nahi", "thoda waqt", "who knows what time brings" — but make it clear this is over. Sound genuinely warm while closing every exit.`
+};
+
+// Queue system
+let isProcessing = false;
+const requestQueue = [];
+
+const queueMessages = [
+  "Thoda sabr karo, aunty bahut demand mein hain aajkal...",
+  "Aunty chai pi rahi hain, bas aa rahi hain...",
+  "Aunty ek aur rejection finish kar rahi hain...",
+  "Bas thoda wait, aunty poori taiyaari se likhti hain...",
+  "Ek minute, aunty apna dupatta theek kar rahi hain...",
+];
+
+async function callClaudeAPI(reason, tone, side) {
+  const response = await fetch('/api/generate', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ reason, tone, side })
+  });
+  if (!response.ok) {
+    const err = await response.json();
+    throw new Error(err.error || 'API failed');
+  }
+  const data = await response.json();
+  return data.text || '';
+}
+
+async function processQueue() {
+  if (isProcessing || requestQueue.length === 0) return;
+  isProcessing = true;
+  const job = requestQueue.shift();
+
+  requestQueue.forEach((req, i) => {
+    req.btn.innerHTML = '<span style="font-size:12px">' + (i+1) + ' log aapke aage hain... ' + queueMessages[i % queueMessages.length] + '</span>';
+  });
+
+  try {
+    const text = await callClaudeAPI(job.reason, job.tone, job.side);
+    if (text) {
+      const paragraphs = text.trim().split(/\n\n+/).filter(p => p.trim());
+      document.getElementById('aunty-output').innerHTML = paragraphs.map(p => '<p>' + p.trim() + '</p>').join('');
+      document.getElementById('real-reason-display').textContent = '"' + job.reason + '"';
+      const outputSection = document.getElementById('output-section');
+      outputSection.classList.add('visible');
+      setTimeout(() => outputSection.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    }
+  } catch(err) {
+    console.error(err);
+    document.getElementById('aunty-output').innerHTML = '<p>Aunty abhi available nahi hain. Thodi der baad try karein.</p>';
+    document.getElementById('output-section').classList.add('visible');
+  }
+
+  job.btn.disabled = false;
+  job.btn.innerHTML = 'Rejection likho, aunty style mein ✦';
+  isProcessing = false;
+  processQueue();
+}
+
+function generateRejection() {
+  const reason = document.getElementById('reason-input').value.trim();
+  if (!reason) { document.getElementById('reason-input').focus(); return; }
+  const tone = document.querySelector('input[name="tone"]:checked').value;
+  const btn = document.getElementById('generate-btn');
+  btn.disabled = true;
+  const queueMsg = queueMessages[Math.floor(Math.random() * queueMessages.length)];
+  btn.innerHTML = '<span style="font-size:12px">' + queueMsg + '</span>';
+  requestQueue.push({ reason, tone, side: selectedSide, btn });
+  processQueue();
+}
+
+function copyOutput() {
+  const text = document.getElementById('aunty-output').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = event.target;
+    btn.textContent = 'Copy ho gaya ✓';
+    setTimeout(() => btn.textContent = 'Copy karo', 2000);
+  });
+}
+
+function resetForm() {
+  document.getElementById('output-section').classList.remove('visible');
+  document.getElementById('reason-input').value = '';
+  document.getElementById('reason-input').focus();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// BUBBLE ANIMATION SYSTEM
+const characters = [
+  { b1: 'mom-b1', b2: 'mom-b2', delay: 0 },
+  { b1: 'dad-b1', b2: 'dad-b2', delay: 700 },
+  { b1: 'boy-b1', b2: 'boy-b2', delay: 1400 },
+  { b1: 'bua-b1', b2: 'bua-b2', delay: 2100 },
+  { b1: 'dadiji-b1', b2: 'dadiji-b2', delay: 400 },
+  { b1: 'chacha-b1', b2: 'chacha-b2', delay: 1100 },
+  { b1: 'girlsmom-b1', b2: 'girlsmom-b2', delay: 1800 },
+  { b1: 'girl-b1', b2: 'girl-b2', delay: 900 },
+  { b1: 'brother-b1', b2: 'brother-b2', delay: 300 },
+];
+
+function animateBubble(char) {
+  const b1 = document.getElementById(char.b1);
+  const b2 = document.getElementById(char.b2);
+  
+  const cycle = () => {
+    // Show bubble 1
+    b1.classList.add('visible');
+    b2.classList.remove('visible');
+    
+    setTimeout(() => {
+      // Switch to bubble 2
+      b1.classList.remove('visible');
+      setTimeout(() => {
+        b2.classList.add('visible');
+        setTimeout(() => {
+          b2.classList.remove('visible');
+          setTimeout(cycle, 600);
+        }, 3200);
+      }, 400);
+    }, 3200);
+  };
+
+  setTimeout(cycle, char.delay);
+}
+
+// Start all bubble animations
+characters.forEach(char => animateBubble(char));
+</script>
+
+</body>
+</html>

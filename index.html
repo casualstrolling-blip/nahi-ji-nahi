@@ -167,6 +167,56 @@
     margin: 0 4px;
   }
 
+  .scroll-hint {
+    display: none;
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 6px 0 2px;
+    opacity: 0.7;
+    animation: fadeHint 3s ease-in-out infinite;
+  }
+
+  @keyframes fadeHint {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.9; }
+  }
+
+  @media (max-width: 768px) {
+    .scroll-hint { display: block; }
+  }
+
+  .scroll-arrows {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .scroll-arrow {
+    font-size: 14px;
+    animation: nudge 1.5s ease-in-out infinite;
+  }
+
+  .scroll-arrow.left { animation-delay: 0s; }
+  .scroll-arrow.right { animation-delay: 0.75s; }
+
+  @keyframes nudge {
+    0%, 100% { transform: translateX(0); opacity: 0.5; }
+    50% { transform: translateX(3px); opacity: 1; }
+  }
+
+  .scroll-arrow.left {
+    animation-name: nudgeLeft;
+  }
+
+  @keyframes nudgeLeft {
+    0%, 100% { transform: translateX(0); opacity: 0.5; }
+    50% { transform: translateX(-3px); opacity: 1; }
+  }
+
   /* CHARACTERS */
   .character {
     display: flex;
@@ -672,6 +722,13 @@
     </div>
   </div>
 </div></div>
+<div class="scroll-hint">
+  <span class="scroll-arrows">
+    <span class="scroll-arrow left">←</span>
+    swipe to meet everyone
+    <span class="scroll-arrow right">→</span>
+  </span>
+</div>
 
 <div class="divider" style="margin-top: 2rem;">
   <div class="divider-line"></div>
@@ -936,6 +993,19 @@ function nextChar() {
 // Start after page loads
 window.addEventListener('load', () => {
   setTimeout(nextChar, 800);
+
+  // Center the characters row on mobile so boy and girl are visible
+  const row = document.querySelector('.characters-row');
+  if (row) {
+    setTimeout(() => {
+      const divider = document.querySelector('.scene-divider');
+      if (divider) {
+        const dividerLeft = divider.offsetLeft;
+        const rowWidth = row.clientWidth;
+        row.scrollLeft = dividerLeft - (rowWidth / 2);
+      }
+    }, 100);
+  }
 });
 </script>
 

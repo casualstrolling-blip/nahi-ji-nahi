@@ -179,10 +179,8 @@
 
   .bubble-wrap {
     position: relative;
-    height: 60px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
+    width: 100%;
+    height: 70px;
     margin-bottom: 4px;
   }
 
@@ -190,55 +188,43 @@
     background: white;
     border: 2px solid var(--rose);
     border-radius: 10px;
-    padding: 6px 10px;
+    padding: 7px 10px;
     font-size: 10px;
     font-family: 'Nunito', sans-serif;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--dark);
     text-align: center;
-    max-width: 110px;
-    min-width: 70px;
+    width: 110px;
     line-height: 1.4;
     position: absolute;
-    bottom: 100%;
+    bottom: 8px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) scale(0.8);
     opacity: 0;
-    transition: opacity 0.15s ease;
+    transition: opacity 0.2s ease, transform 0.2s ease;
     white-space: normal;
     word-wrap: break-word;
-    box-shadow: 0 4px 12px rgba(139,26,58,0.2);
-    z-index: 100;
+    box-shadow: 0 4px 16px rgba(139,26,58,0.25);
+    z-index: 999;
+    pointer-events: none;
   }
 
   .bubble::after {
     content: '';
     position: absolute;
-    bottom: -7px;
+    bottom: -8px;
     left: 50%;
     transform: translateX(-50%);
     width: 0; height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 7px solid var(--gold);
-  }
-
-  .bubble::before {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0; height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 6px solid white;
-    z-index: 1;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 8px solid var(--rose);
   }
 
   .bubble.visible { 
     opacity: 1 !important;
-    z-index: 200;
+    transform: translateX(-50%) scale(1) !important;
+    z-index: 999 !important;
   }
 
   /* SVG CHARACTERS */
@@ -885,81 +871,72 @@ function resetForm() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// SEQUENTIAL BUBBLE ANIMATION - one character at a time
-// Boy and girl are priority characters - they go first
-const priorityChars = [
-  { id: 'boy',  b1: 'boy-b1',  b2: 'boy-b2',  img: 'img-boy' },
-  { id: 'girl', b1: 'girl-b1', b2: 'girl-b2',  img: 'img-girl' },
+// BUBBLE ANIMATION
+const allChars = [
+  { b1: 'boy-b1',      b2: 'boy-b2',      img: 'img-boy',      priority: true },
+  { b1: 'girl-b1',     b2: 'girl-b2',      img: 'img-girl',     priority: true },
+  { b1: 'mom-b1',      b2: 'mom-b2',       img: 'img-mom',      priority: false },
+  { b1: 'dad-b1',      b2: 'dad-b2',       img: 'img-dad',      priority: false },
+  { b1: 'bua-b1',      b2: 'bua-b2',       img: 'img-bua',      priority: false },
+  { b1: 'dadiji-b1',   b2: 'dadiji-b2',    img: 'img-dadiji',   priority: false },
+  { b1: 'girlsmom-b1', b2: 'girlsmom-b2',  img: 'img-girlsmom', priority: false },
+  { b1: 'girlsdad-b1', b2: 'girlsdad-b2',  img: 'img-girlsdad', priority: false },
 ];
-const supportingChars = [
-  { id: 'mom',      b1: 'mom-b1',      b2: 'mom-b2',      img: 'img-mom' },
-  { id: 'dad',      b1: 'dad-b1',      b2: 'dad-b2',      img: 'img-dad' },
-  { id: 'bua',      b1: 'bua-b1',      b2: 'bua-b2',      img: 'img-bua' },
-  { id: 'dadiji',   b1: 'dadiji-b1',   b2: 'dadiji-b2',   img: 'img-dadiji' },
-  { id: 'girlsmom', b1: 'girlsmom-b1', b2: 'girlsmom-b2', img: 'img-girlsmom' },
-  { id: 'girlsdad', b1: 'girlsdad-b1', b2: 'girlsdad-b2', img: 'img-girlsdad' },
-];
-const characters = [...priorityChars, ...supportingChars];
 
-let currentCharIndex = 0;
-let showingBubble2 = false;
+let charIdx = 0;
+let priorityPhase = true;
+const priorityList = allChars.filter(c => c.priority);
+const supportList = allChars.filter(c => !c.priority);
+let shuffled = [...supportList].sort(() => Math.random() - 0.5);
+let sequence = [...priorityList, ...shuffled];
 
-function bounceChar(imgId) {
+function showBubble(bubbleId) {
+  const el = document.getElementById(bubbleId);
+  if (el) el.classList.add('visible');
+}
+
+function hideBubble(bubbleId) {
+  const el = document.getElementById(bubbleId);
+  if (el) el.classList.remove('visible');
+}
+
+function bounceImg(imgId) {
   const el = document.getElementById(imgId);
   if (!el) return;
-  el.style.transition = 'transform 0.2s ease';
-  el.style.transform = 'translateY(-8px) scale(1.05)';
-  setTimeout(() => {
-    el.style.transform = 'translateY(0px) scale(1)';
-  }, 200);
+  el.style.transition = 'transform 0.18s ease';
+  el.style.transform = 'translateY(-10px) scale(1.06)';
+  setTimeout(() => { el.style.transform = 'translateY(0) scale(1)'; }, 200);
 }
 
-function hideAllBubbles() {
-  characters.forEach(c => {
-    const b1 = document.getElementById(c.b1);
-    const b2 = document.getElementById(c.b2);
-    if (b1) b1.classList.remove('visible');
-    if (b2) b2.classList.remove('visible');
-  });
-}
+function nextChar() {
+  const char = sequence[charIdx % sequence.length];
+  charIdx++;
 
-let priorityDone = false;
+  // Show bubble 1
+  showBubble(char.b1);
+  bounceImg(char.img);
 
-function runSequence() {
-  hideAllBubbles();
-  const char = characters[currentCharIndex];
-  const b1 = document.getElementById(char.b1);
-  const b2 = document.getElementById(char.b2);
-  const dur1 = getRandDuration();
-  const dur2 = getRandDuration();
-
-  if (b1) b1.classList.add('visible');
-  bounceChar(char.img);
-
+  // After 2s hide b1 show b2
   setTimeout(() => {
-    if (b1) b1.classList.remove('visible');
+    hideBubble(char.b1);
     setTimeout(() => {
-      if (b2) b2.classList.add('visible');
-      bounceChar(char.img);
+      showBubble(char.b2);
+      bounceImg(char.img);
+      // After 2s hide b2 next char
       setTimeout(() => {
-        if (b2) b2.classList.remove('visible');
-
-        // First go through boy and girl, then random from all
-        if (!priorityDone && currentCharIndex < priorityChars.length - 1) {
-          currentCharIndex++;
-        } else {
-          priorityDone = true;
-          const nextOptions = characters.map((c, i) => i).filter(i => i !== currentCharIndex);
-          currentCharIndex = nextOptions[Math.floor(Math.random() * nextOptions.length)];
-        }
-        setTimeout(runSequence, 150);
-      }, dur2);
+        hideBubble(char.b2);
+        // Random gap 200-600ms
+        const gap = 200 + Math.floor(Math.random() * 400);
+        setTimeout(nextChar, gap);
+      }, 1800 + Math.floor(Math.random() * 800));
     }, 150);
-  }, dur1);
+  }, 1800 + Math.floor(Math.random() * 800));
 }
 
-// Start sequential animation after 1.5 seconds
-setTimeout(runSequence, 1500);
+// Start after page loads
+window.addEventListener('load', () => {
+  setTimeout(nextChar, 800);
+});
 </script>
 
 </body>

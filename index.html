@@ -103,7 +103,7 @@
     padding: 2rem 1rem 1.5rem;
     position: relative;
     overflow: hidden;
-    min-height: 260px;
+    min-height: 300px;
   }
 
   .char-img {
@@ -173,16 +173,16 @@
     align-items: center;
     gap: 4px;
     position: relative;
-    width: 90px;
+    width: 120px;
   }
 
   .bubble-wrap {
     position: relative;
-    height: 64px;
+    height: 48px;
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
   }
 
   .bubble {
@@ -199,9 +199,9 @@
     min-width: 70px;
     line-height: 1.4;
     position: absolute;
-    bottom: 8px;
+    bottom: 0px;
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.15s ease;
     white-space: normal;
     word-wrap: break-word;
     box-shadow: 0 2px 10px rgba(139,26,58,0.12);
@@ -249,8 +249,8 @@
   }
 
   .char-img {
-    height: 120px;
-    width: 80px;
+    height: 160px;
+    width: 110px;
     object-fit: contain;
     object-position: bottom;
     display: block;
@@ -919,26 +919,28 @@ function runSequence() {
   const char = characters[currentCharIndex];
   const b1 = document.getElementById(char.b1);
   const b2 = document.getElementById(char.b2);
+  const dur1 = getRandDuration();
+  const dur2 = getRandDuration();
 
-  // Show bubble 1 with bounce
+  // Snap bubble 1 in
   if (b1) b1.classList.add('visible');
   bounceChar(char.img);
 
-  // After 2.8s switch to bubble 2
   setTimeout(() => {
     if (b1) b1.classList.remove('visible');
     setTimeout(() => {
+      // Snap bubble 2 in
       if (b2) b2.classList.add('visible');
       bounceChar(char.img);
-
-      // After 2.8s move to next character
       setTimeout(() => {
         if (b2) b2.classList.remove('visible');
-        currentCharIndex = (currentCharIndex + 1) % characters.length;
-        setTimeout(runSequence, 300);
-      }, 2800);
-    }, 300);
-  }, 2800);
+        // Jump to random next character for unpredictability
+        const nextOptions = characters.map((c, i) => i).filter(i => i !== currentCharIndex);
+        currentCharIndex = nextOptions[Math.floor(Math.random() * nextOptions.length)];
+        setTimeout(runSequence, 150);
+      }, dur2);
+    }, 150);
+  }, dur1);
 }
 
 // Start sequential animation after 1.5 seconds

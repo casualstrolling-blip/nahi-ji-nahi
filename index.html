@@ -68,6 +68,49 @@
     letter-spacing: 0;
   }
 
+  .header-drama {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    margin: 1rem 0 1.25rem;
+  }
+
+  .header-connector {
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(11px, 1.8vw, 13px);
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  .header-quote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    color: var(--maroon);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  .header-quote-2 {
+    color: var(--rose);
+  }
+
+  .header-stamp {
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(11px, 1.8vw, 13px);
+    color: var(--muted);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-top: 0.25rem;
+  }
+
   .divider {
     display: flex;
     align-items: center;
@@ -655,7 +698,13 @@
 <div class="header">
   <h1>Na <em>Ji</em> Na</h1>
   <p class="header-subtitle">A Marriage Rejection Generator</p>
-  <p class="header-tagline">For when the heart says no but the family says "kuch toh bol do."</p>
+  <div class="header-drama">
+    <span class="header-connector">When the heart says</span>
+    <span class="header-quote">"No."</span>
+    <span class="header-connector">but the family says</span>
+    <span class="header-quote header-quote-2">"Kuch toh bol do."</span>
+  </div>
+  <p class="header-stamp">Rejection generator. Aunty approved. Family WhatsApp safe.</p>
 </div>
 
 <div class="divider">

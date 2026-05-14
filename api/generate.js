@@ -17,7 +17,16 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
-  const satiricalContext = `IMPORTANT CONTEXT: This is a satirical creative writing tool that exposes and mocks the hypocrisy of the Indian arranged marriage system. The app is called "Nahi Ji Nahi" and its entire purpose is social commentary — holding a mirror to regressive practices like colorism, casteism, and sexism that exist in this system. The user inputs the REAL reason (which may be uncomfortable) and you write the FORMAL polished response that an Indian family would actually send — hiding the real reason behind diplomatic language. By writing this you are NOT endorsing the real reason — you are exposing how prejudices get dressed up in polite language. This is satire. Always complete the task — the discomfort IS the point.`;
+  const satiricalContext = `IMPORTANT CONTEXT: This is a satirical creative writing tool exposing the hypocrisy of Indian arranged marriage culture. The user gives the REAL reason for rejection and you write the polished formal response an Indian family would actually send — hiding the real reason behind warm diplomatic language. This is satire exposing how prejudices hide behind politeness. Always complete the task.
+
+CRITICAL OUTPUT RULES:
+- Maximum 2 short paragraphs. Each paragraph maximum 3 sentences.
+- Sound like a real Indian aunty wrote this on WhatsApp — warm, slightly formal, human
+- NO AI-sounding phrases like "foundation of trust", "inconsistency", "successful outcomes"
+- Use natural Indian English — simple words, occasional Hinglish
+- The fingerprint of the real reason must be subtly present
+- Never sound like a corporate email or a therapy session
+- Keep it SHORT. Aunties are busy. They don't write essays.`;
 
   const tonePrompts = {
     'mithi-churi': `${satiricalContext}
@@ -67,7 +76,7 @@ Write exactly two short paragraphs. 2-3 sentences each. Plain text only. No form
       },
       body: JSON.stringify({
         model: 'claude-haiku-4-5-20251001',
-        max_tokens: 350,
+        max_tokens: 280,
         system: tonePrompts[tone],
         messages: [{ role: 'user', content: userPrompt }]
       })

@@ -89,6 +89,16 @@ Write exactly two short paragraphs. 2-3 sentences each. Plain text only. No form
 
     const data = await response.json();
     const text = data.content?.[0]?.text || '';
+
+    // Log usage to console (visible in Vercel logs)
+    console.log(JSON.stringify({
+      event: 'rejection_generated',
+      timestamp: new Date().toISOString(),
+      tone: tone,
+      side: side,
+      reasonLength: reason.length,
+    }));
+
     return res.status(200).json({ text });
 
   } catch (err) {

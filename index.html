@@ -36,20 +36,7 @@
     overflow-x: hidden;
   }
 
-  .page-content {
-    display: flex;
-    flex-direction: column;
-  }
 
-  .scene-block { order: 2; }
-  .form-block { order: 3; }
-  .output-block { order: 4; }
-  .footer-block { order: 5; }
-
-  @media (max-width: 768px) {
-    .scene-block { order: 3; }
-    .form-block { order: 2; }
-  }
 
   /* HEADER */
   .header {
@@ -731,14 +718,14 @@
   <p class="header-stamp">Rejection generator. Aunty approved. Family WhatsApp safe.</p>
 </div>
 
-<div class="page-content"><div class="divider scene-block" style="margin: 0.5rem auto;">
+<div class="divider" style="margin: 0.5rem auto;">
   <div class="divider-line"></div>
   <div class="divider-diamond"></div>
   <div class="divider-line"></div>
 </div>
 
 <!-- ANIMATED SCENE -->
-<div class="scene-block"><div class="scene-wrapper">
+<div class="scene-wrapper" id="scene-section">
   <div class="scene">
     <span class="scene-label left">Boy's Side</span>
     <span class="scene-label right">Girl's Side</span>
@@ -830,8 +817,7 @@
     </div>
   </div>
 </div></div>
-</div>
-<div class="scroll-hint scene-block">
+<div class="scroll-hint" id="scroll-hint-section">
   <span class="scroll-arrows">
     <span class="scroll-arrow left">←</span>
     swipe to meet everyone
@@ -845,8 +831,8 @@
   <div class="divider-line"></div>
 </div>
 
-<div class="form-block"><!-- FORM -->
-<div class="form-section">
+<!-- FORM -->
+<div class="form-section" id="form-section">
   <div class="form-card">
 
     <span class="form-section-label">Kaun kar raha hai reject?</span>
@@ -907,7 +893,7 @@
 </div>
 </div>
 
-<div class="output-block"><!-- OUTPUT -->
+<!-- OUTPUT -->
 <div class="output-section" id="output-section">
   <div class="output-card">
     <div class="output-eyebrow">Aunty ka jawab</div>
@@ -919,9 +905,8 @@
     </div>
   </div>
 </div>
-</div>
 
-<div class="footer-block"><div class="marigold-row" style="margin-top: 2rem;">🌸 🌼 🌸 🌼 🌸</div>
+<div class="marigold-row" style="margin-top: 2rem;">🌸 🌼 🌸 🌼 🌸</div>
 
 <div class="footer">
   Na Ji Na &nbsp;·&nbsp; Koi alliance permanently close nahi hoti, bas "dekhte hain" hoti hai
@@ -1180,6 +1165,18 @@ function desktopLoop() {
 
 window.addEventListener('load', () => {
   isMobile = window.innerWidth <= 768;
+  
+  // On mobile reorder: move form above scene
+  if (window.innerWidth <= 768) {
+    const form = document.getElementById('form-section');
+    const scene = document.getElementById('scene-section');
+    const scrollHint = document.getElementById('scroll-hint-section');
+    const header = document.querySelector('.header');
+    if (form && scene && header) {
+      // Insert form right after header
+      header.parentNode.insertBefore(form, scene);
+    }
+  }
 
   // Center scroll on mobile
   const row = document.querySelector('.characters-row');
@@ -1252,6 +1249,5 @@ window.addEventListener('resize', () => {
 });
 </script>
 
-</div>
 </body>
 </html>

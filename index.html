@@ -103,7 +103,7 @@
     padding: 2rem 1rem 1.5rem;
     position: relative;
     overflow: hidden;
-    min-height: 220px;
+    min-height: 260px;
   }
 
   .char-img {
@@ -148,7 +148,7 @@
 
   .side {
     display: flex;
-    gap: 8px;
+    gap: 4px;
     align-items: flex-end;
     flex-shrink: 0;
   }
@@ -171,8 +171,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
     position: relative;
+    width: 90px;
   }
 
   .bubble-wrap {
@@ -248,9 +249,10 @@
   }
 
   .char-img {
-    height: 130px;
-    width: auto;
+    height: 120px;
+    width: 80px;
     object-fit: contain;
+    object-position: bottom;
     display: block;
     transition: transform 0.25s ease;
   }
@@ -909,7 +911,6 @@ function hideAllBubbles() {
     const b2 = document.getElementById(c.b2);
     if (b1) b1.classList.remove('visible');
     if (b2) b2.classList.remove('visible');
-    switchExpr(c, true);
   });
 }
 
@@ -940,8 +941,8 @@ function runSequence() {
   }, 2800);
 }
 
-// Start sequential animation after 1 second
-setTimeout(runSequence, 1000);
+// Start sequential animation after 1.5 seconds
+setTimeout(runSequence, 1500);
 </script>
 
 </body>

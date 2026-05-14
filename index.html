@@ -104,7 +104,8 @@
     padding: 2rem 1rem 1.5rem;
     position: relative;
     overflow: visible;
-    min-height: 320px;
+    min-height: auto;
+    padding-bottom: 1.5rem;
   }
 
   .char-img {
@@ -299,8 +300,9 @@
     transition: transform 0.25s ease;
   }
 
-  @media (max-width: 600px) {
-    .char-img { height: 90px; }
+  @media (max-width: 768px) {
+    .char-img { height: 140px; width: 95px; }
+    .char-name { font-size: 12px; }
   }
 
   .char-name {
@@ -605,11 +607,12 @@
     opacity: 0.4;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     .tone-grid { grid-template-columns: 1fr; }
-    .char-svg { width: 40px; height: 64px; }
-    .bubble { font-size: 8.5px; max-width: 78px; }
-    .scene { padding: 1.5rem 0.5rem 1rem; }
+    .bubble { font-size: 10px; width: 100px; }
+    .bubble-wrap { height: 60px; }
+    .scene { padding: 1rem 0.5rem 1rem; }
+    .characters-row { padding-top: 0.5rem; }
   }
 </style>
 </head>

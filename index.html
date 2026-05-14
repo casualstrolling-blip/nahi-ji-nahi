@@ -643,7 +643,7 @@
       <div class="side boys">
 
         <!-- BUA -->
-        <div class="character" id="char-bua">
+        <div class="character" id="char-bua" onclick="tapChar('bua')" style="cursor:pointer;">
           <div class="bubble-wrap"><div class="bubble" id="bua-b1">Haan dekhte hain</div><div class="bubble" id="bua-b2">Mujhe toh pehle din se pata tha — nahi hoga</div></div>
           <div class="char-container">
             <img src="bua.png" class="char-img" id="img-bua" alt="Bua"/>
@@ -652,7 +652,7 @@
         </div>
 
         <!-- MOM -->
-        <div class="character" id="char-mom">
+        <div class="character" id="char-mom" onclick="tapChar('mom')" style="cursor:pointer;">
           <div class="bubble-wrap"><div class="bubble" id="mom-b1">Mera beta bahut independent hai</div><div class="bubble" id="mom-b2">Uska dabba maine pack kiya aaj bhi</div></div>
           <div class="char-container">
             <img src="mom.png" class="char-img" id="img-mom" alt="Mom"/>
@@ -661,7 +661,7 @@
         </div>
 
         <!-- DAD -->
-        <div class="character" id="char-dad">
+        <div class="character" id="char-dad" onclick="tapChar('dad')" style="cursor:pointer;">
           <div class="bubble-wrap"><div class="bubble" id="dad-b1">Beta ki khushi mein humari khushi</div><div class="bubble" id="dad-b2">Bas nipat jaaye ek baar</div></div>
           <div class="char-container">
             <img src="dad.png" class="char-img" id="img-dad" alt="Dad"/>
@@ -670,7 +670,7 @@
         </div>
 
         <!-- THE BOY -->
-        <div class="character" id="char-boy">
+        <div class="character" id="char-boy" onclick="tapChar('boy')" style="cursor:pointer;">
           <div class="bubble-wrap"><div class="bubble" id="boy-b1">Pehli baar dekh raha hoon aaj</div><div class="bubble" id="boy-b2">Insta pe 2 ghante stalk kiya tha kal raat</div></div>
           <div class="char-container">
             <img src="boy.png" class="char-img" id="img-boy" alt="The Boy"/>
@@ -686,7 +686,7 @@
       <div class="side girls">
 
         <!-- THE GIRL -->
-        <div class="character" id="char-girl">
+        <div class="character" id="char-girl" onclick="tapChar('girl')" style="cursor:pointer;">
           <div class="bubble-wrap"><div class="bubble" id="girl-b1">Ladka theek lag raha hai</div><div class="bubble" id="girl-b2">Uski mummy nahi lag rahi theek</div></div>
           <div class="char-container">
             <img src="girl.png" class="char-img" id="img-girl" alt="The Girl"/>
@@ -695,7 +695,7 @@
         </div>
 
         <!-- GIRL'S MOM -->
-        <div class="character" id="char-girlsmom">
+        <div class="character" id="char-girlsmom" onclick="tapChar('girlsmom')" style="cursor:pointer;">
           <div class="bubble-wrap"><div class="bubble" id="girlsmom-b1">Humari beti bahut simple hai</div><div class="bubble" id="girlsmom-b2">Usne 47 rishte reject kiye hain</div></div>
           <div class="char-container">
             <img src="girlsmom.png" class="char-img" id="img-girlsmom" alt="Girl's Mom"/>
@@ -704,7 +704,7 @@
         </div>
 
         <!-- DADIJI -->
-        <div class="character" id="char-dadiji">
+        <div class="character" id="char-dadiji" onclick="tapChar('dadiji')" style="cursor:pointer;">
           <div class="bubble-wrap"><div class="bubble" id="dadiji-b1">Ladki bahut achhi lagi humein</div><div class="bubble" id="dadiji-b2">Rang thoda aur saaf hota toh...</div></div>
           <div class="char-container">
             <img src="dadiji.png" class="char-img" id="img-dadiji" alt="Dadiji"/>
@@ -713,7 +713,7 @@
         </div>
 
         <!-- GIRL'S DAD -->
-        <div class="character" id="char-girlsdad">
+        <div class="character" id="char-girlsdad" onclick="tapChar('girlsdad')" style="cursor:pointer;">
           <div class="bubble-wrap"><div class="bubble" id="girlsdad-b1">Haan ji bilkul ji</div><div class="bubble" id="girlsdad-b2">Jo beti sahi samjhe</div></div>
           <div class="char-container">
             <img src="girlsdad.png" class="char-img" id="img-girlsdad" alt="Girl's Dad"/>
@@ -1078,7 +1078,7 @@ window.addEventListener('load', () => {
       }
     }, 100);
 
-    // On mobile scroll - activate the centered character
+      // On mobile scroll - activate centered char when scroll stops
     let scrollTimeout;
     row.addEventListener('scroll', () => {
       clearTimeout(scrollTimeout);
@@ -1087,7 +1087,7 @@ window.addEventListener('load', () => {
           const centered = getCenteredChar();
           if (centered) activateChar(centered);
         }
-      }, 150);
+      }, 200);
     });
   }
 
@@ -1096,6 +1096,36 @@ window.addEventListener('load', () => {
     setTimeout(desktopLoop, 800);
   }
 });
+
+// TAP handler - works on both mobile and desktop
+function tapChar(charId) {
+  const char = allChars.find(c => c.id === charId);
+  if (!char) return;
+  clearTimeout(bubbleTimer);
+  hideAllBubbles();
+  activeChar = char;
+  bubblePhase = 1;
+  
+  // Immediate pop on tap
+  showBubble(char.b1);
+  bounceImg(char.img);
+  
+  const dur = 2500;
+  bubbleTimer = setTimeout(() => {
+    hideBubble(char.b1);
+    setTimeout(() => {
+      showBubble(char.b2);
+      bounceImg(char.img);
+      bubbleTimer = setTimeout(() => {
+        hideBubble(char.b2);
+        // Resume normal loop after tap
+        if (window.innerWidth > 768) {
+          setTimeout(desktopLoop, 300);
+        }
+      }, dur);
+    }, 150);
+  }, dur);
+}
 
 window.addEventListener('resize', () => {
   isMobile = window.innerWidth <= 768;

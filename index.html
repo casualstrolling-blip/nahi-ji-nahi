@@ -21,7 +21,7 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'Hind', sans-serif;
+    font-family: 'Nunito', sans-serif;
     background: var(--cream);
     color: var(--dark);
     min-height: 100vh;
@@ -103,7 +103,7 @@
     padding: 2rem 1rem 1.5rem;
     position: relative;
     overflow: hidden;
-    min-height: 300px;
+    min-height: 320px;
   }
 
   .char-img {
@@ -148,7 +148,7 @@
 
   .side {
     display: flex;
-    gap: 4px;
+    gap: 2px;
     align-items: flex-end;
     flex-shrink: 0;
   }
@@ -173,7 +173,7 @@
     align-items: center;
     gap: 4px;
     position: relative;
-    width: 120px;
+    width: 100px;
   }
 
   .bubble-wrap {
@@ -187,12 +187,12 @@
 
   .bubble {
     background: white;
-    border: 1.5px solid var(--gold);
+    border: 2px solid var(--rose);
     border-radius: 10px;
     padding: 6px 10px;
-    font-size: 9px;
-    font-family: 'Hind', sans-serif;
-    font-weight: 500;
+    font-size: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
     color: var(--dark);
     text-align: center;
     max-width: 110px;
@@ -204,8 +204,8 @@
     transition: opacity 0.15s ease;
     white-space: normal;
     word-wrap: break-word;
-    box-shadow: 0 2px 10px rgba(139,26,58,0.12);
-    z-index: 10;
+    box-shadow: 0 4px 12px rgba(139,26,58,0.2);
+    z-index: 100;
   }
 
   .bubble::after {
@@ -233,7 +233,10 @@
     z-index: 1;
   }
 
-  .bubble.visible { opacity: 1; }
+  .bubble.visible { 
+    opacity: 1 !important; 
+    z-index: 100;
+  }
 
   /* SVG CHARACTERS */
   .char-svg {
@@ -249,8 +252,8 @@
   }
 
   .char-img {
-    height: 160px;
-    width: 110px;
+    height: 145px;
+    width: 95px;
     object-fit: contain;
     object-position: bottom;
     display: block;
@@ -262,12 +265,11 @@
   }
 
   .char-name {
-    font-size: 9px;
-    color: var(--muted);
+    font-size: 11px;
+    color: var(--maroon);
     text-align: center;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    opacity: 0.7;
+    font-weight: 600;
+    letter-spacing: 0.02em;
   }
 
   /* MAIN FORM */
@@ -286,13 +288,13 @@
   }
 
   .form-section-label {
-    font-size: 10px;
-    letter-spacing: 0.2em;
+    font-size: 13px;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 10px;
+    color: var(--maroon);
+    margin-bottom: 12px;
     display: block;
-    font-weight: 500;
+    font-weight: 700;
   }
 
   /* SIDE TOGGLE */
@@ -308,7 +310,7 @@
     border: 1.5px solid rgba(212,160,23,0.3);
     border-radius: 12px;
     background: transparent;
-    font-family: 'Hind', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 13px;
     font-weight: 500;
     color: var(--muted);
@@ -334,8 +336,8 @@
     border: 1.5px solid rgba(212,160,23,0.3);
     border-radius: 12px;
     padding: 14px;
-    font-family: 'Hind', sans-serif;
-    font-size: 14px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
     color: var(--dark);
     background: var(--cream);
     resize: vertical;
@@ -397,17 +399,17 @@
   }
 
   .tone-name {
-    font-size: 12px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 700;
     color: var(--maroon);
     display: block;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
   }
 
   .tone-desc {
-    font-size: 10px;
+    font-size: 12px;
     color: var(--muted);
-    font-weight: 300;
+    font-weight: 400;
   }
 
   /* GENERATE BUTTON */
@@ -505,7 +507,7 @@
   }
 
   .action-btn {
-    font-family: 'Hind', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 12px;
     color: var(--muted);
     background: transparent;
@@ -598,13 +600,22 @@
       <!-- BOY'S SIDE -->
       <div class="side boys">
 
+        <!-- BUA -->
+        <div class="character" id="char-bua">
+          <div class="bubble-wrap"><div class="bubble" id="bua-b1">Haan dekhte hain</div><div class="bubble" id="bua-b2">Mujhe toh pehle din se pata tha — nahi hoga</div></div>
+          <div class="char-container">
+            <img src="bua.png" class="char-img" id="img-bua" alt="Bua"/>
+          </div>
+          <span class="char-name">Bua</span>
+        </div>
+
         <!-- MOM -->
         <div class="character" id="char-mom">
           <div class="bubble-wrap"><div class="bubble" id="mom-b1">Mera beta bahut independent hai</div><div class="bubble" id="mom-b2">Uska dabba maine pack kiya aaj bhi</div></div>
           <div class="char-container">
             <img src="mom.png" class="char-img" id="img-mom" alt="Mom"/>
           </div>
-          <span class="char-name">Mom</span>
+          <span class="char-name">Boy's Mom</span>
         </div>
 
         <!-- DAD -->
@@ -613,7 +624,7 @@
           <div class="char-container">
             <img src="dad.png" class="char-img" id="img-dad" alt="Dad"/>
           </div>
-          <span class="char-name">Dad</span>
+          <span class="char-name">Boy's Dad</span>
         </div>
 
         <!-- THE BOY -->
@@ -625,15 +636,6 @@
           <span class="char-name">The Boy</span>
         </div>
 
-        <!-- BUA -->
-        <div class="character" id="char-bua">
-          <div class="bubble-wrap"><div class="bubble" id="bua-b1">Haan dekhte hain</div><div class="bubble" id="bua-b2">Mujhe toh pehle din se pata tha — nahi hoga</div></div>
-          <div class="char-container">
-            <img src="bua.png" class="char-img" id="img-bua" alt="Bua"/>
-          </div>
-          <span class="char-name">Bua</span>
-        </div>
-
       </div>
 
       <div class="scene-divider"></div>
@@ -641,13 +643,13 @@
       <!-- GIRL'S SIDE -->
       <div class="side girls">
 
-        <!-- DADIJI -->
-        <div class="character" id="char-dadiji">
-          <div class="bubble-wrap"><div class="bubble" id="dadiji-b1">Ladki bahut achhi lagi humein</div><div class="bubble" id="dadiji-b2">Rang thoda aur saaf hota toh...</div></div>
+        <!-- THE GIRL -->
+        <div class="character" id="char-girl">
+          <div class="bubble-wrap"><div class="bubble" id="girl-b1">Ladka theek lag raha hai</div><div class="bubble" id="girl-b2">Uski mummy nahi lag rahi theek</div></div>
           <div class="char-container">
-            <img src="dadiji.png" class="char-img" id="img-dadiji" alt="Dadiji"/>
+            <img src="girl.png" class="char-img" id="img-girl" alt="The Girl"/>
           </div>
-          <span class="char-name">Dadiji</span>
+          <span class="char-name">The Girl</span>
         </div>
 
         <!-- GIRL'S MOM -->
@@ -659,6 +661,15 @@
           <span class="char-name">Girl's Mom</span>
         </div>
 
+        <!-- DADIJI -->
+        <div class="character" id="char-dadiji">
+          <div class="bubble-wrap"><div class="bubble" id="dadiji-b1">Ladki bahut achhi lagi humein</div><div class="bubble" id="dadiji-b2">Rang thoda aur saaf hota toh...</div></div>
+          <div class="char-container">
+            <img src="dadiji.png" class="char-img" id="img-dadiji" alt="Dadiji"/>
+          </div>
+          <span class="char-name">Dadiji</span>
+        </div>
+
         <!-- GIRL'S DAD -->
         <div class="character" id="char-girlsdad">
           <div class="bubble-wrap"><div class="bubble" id="girlsdad-b1">Haan ji bilkul ji</div><div class="bubble" id="girlsdad-b2">Jo beti sahi samjhe</div></div>
@@ -666,15 +677,6 @@
             <img src="girlsdad.png" class="char-img" id="img-girlsdad" alt="Girl's Dad"/>
           </div>
           <span class="char-name">Girl's Dad</span>
-        </div>
-
-        <!-- THE GIRL -->
-        <div class="character" id="char-girl">
-          <div class="bubble-wrap"><div class="bubble" id="girl-b1">Ladka theek lag raha hai</div><div class="bubble" id="girl-b2">Uski mummy nahi lag rahi theek</div></div>
-          <div class="char-container">
-            <img src="girl.png" class="char-img" id="img-girl" alt="The Girl"/>
-          </div>
-          <span class="char-name">The Girl</span>
         </div>
 
       </div>
@@ -881,16 +883,20 @@ function resetForm() {
 }
 
 // SEQUENTIAL BUBBLE ANIMATION - one character at a time
-const characters = [
+// Boy and girl are priority characters - they go first
+const priorityChars = [
+  { id: 'boy',  b1: 'boy-b1',  b2: 'boy-b2',  img: 'img-boy' },
+  { id: 'girl', b1: 'girl-b1', b2: 'girl-b2',  img: 'img-girl' },
+];
+const supportingChars = [
   { id: 'mom',      b1: 'mom-b1',      b2: 'mom-b2',      img: 'img-mom' },
   { id: 'dad',      b1: 'dad-b1',      b2: 'dad-b2',      img: 'img-dad' },
-  { id: 'boy',      b1: 'boy-b1',      b2: 'boy-b2',      img: 'img-boy' },
   { id: 'bua',      b1: 'bua-b1',      b2: 'bua-b2',      img: 'img-bua' },
   { id: 'dadiji',   b1: 'dadiji-b1',   b2: 'dadiji-b2',   img: 'img-dadiji' },
   { id: 'girlsmom', b1: 'girlsmom-b1', b2: 'girlsmom-b2', img: 'img-girlsmom' },
-  { id: 'girlsdad',  b1: 'girlsdad-b1',  b2: 'girlsdad-b2',  img: 'img-girlsdad' },
-  { id: 'girl',     b1: 'girl-b1',     b2: 'girl-b2',     img: 'img-girl' },
+  { id: 'girlsdad', b1: 'girlsdad-b1', b2: 'girlsdad-b2', img: 'img-girlsdad' },
 ];
+const characters = [...priorityChars, ...supportingChars];
 
 let currentCharIndex = 0;
 let showingBubble2 = false;
@@ -914,6 +920,8 @@ function hideAllBubbles() {
   });
 }
 
+let priorityDone = false;
+
 function runSequence() {
   hideAllBubbles();
   const char = characters[currentCharIndex];
@@ -922,21 +930,25 @@ function runSequence() {
   const dur1 = getRandDuration();
   const dur2 = getRandDuration();
 
-  // Snap bubble 1 in
   if (b1) b1.classList.add('visible');
   bounceChar(char.img);
 
   setTimeout(() => {
     if (b1) b1.classList.remove('visible');
     setTimeout(() => {
-      // Snap bubble 2 in
       if (b2) b2.classList.add('visible');
       bounceChar(char.img);
       setTimeout(() => {
         if (b2) b2.classList.remove('visible');
-        // Jump to random next character for unpredictability
-        const nextOptions = characters.map((c, i) => i).filter(i => i !== currentCharIndex);
-        currentCharIndex = nextOptions[Math.floor(Math.random() * nextOptions.length)];
+
+        // First go through boy and girl, then random from all
+        if (!priorityDone && currentCharIndex < priorityChars.length - 1) {
+          currentCharIndex++;
+        } else {
+          priorityDone = true;
+          const nextOptions = characters.map((c, i) => i).filter(i => i !== currentCharIndex);
+          currentCharIndex = nextOptions[Math.floor(Math.random() * nextOptions.length)];
+        }
         setTimeout(runSequence, 150);
       }, dur2);
     }, 150);

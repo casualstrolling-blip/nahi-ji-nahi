@@ -36,6 +36,21 @@
     overflow-x: hidden;
   }
 
+  .page-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .scene-block { order: 2; }
+  .form-block { order: 3; }
+  .output-block { order: 4; }
+  .footer-block { order: 5; }
+
+  @media (max-width: 768px) {
+    .scene-block { order: 3; }
+    .form-block { order: 2; }
+  }
+
   /* HEADER */
   .header {
     text-align: center;
@@ -716,14 +731,14 @@
   <p class="header-stamp">Rejection generator. Aunty approved. Family WhatsApp safe.</p>
 </div>
 
-<div class="divider" style="margin: 0.5rem auto;">
+<div class="page-content"><div class="divider scene-block" style="margin: 0.5rem auto;">
   <div class="divider-line"></div>
   <div class="divider-diamond"></div>
   <div class="divider-line"></div>
 </div>
 
 <!-- ANIMATED SCENE -->
-<div class="scene-wrapper">
+<div class="scene-block"><div class="scene-wrapper">
   <div class="scene">
     <span class="scene-label left">Boy's Side</span>
     <span class="scene-label right">Girl's Side</span>
@@ -815,7 +830,8 @@
     </div>
   </div>
 </div></div>
-<div class="scroll-hint">
+</div>
+<div class="scroll-hint scene-block">
   <span class="scroll-arrows">
     <span class="scroll-arrow left">←</span>
     swipe to meet everyone
@@ -829,7 +845,7 @@
   <div class="divider-line"></div>
 </div>
 
-<!-- FORM -->
+<div class="form-block"><!-- FORM -->
 <div class="form-section">
   <div class="form-card">
 
@@ -889,8 +905,9 @@
 
   </div>
 </div>
+</div>
 
-<!-- OUTPUT -->
+<div class="output-block"><!-- OUTPUT -->
 <div class="output-section" id="output-section">
   <div class="output-card">
     <div class="output-eyebrow">Aunty ka jawab</div>
@@ -902,8 +919,9 @@
     </div>
   </div>
 </div>
+</div>
 
-<div class="marigold-row" style="margin-top: 2rem;">🌸 🌼 🌸 🌼 🌸</div>
+<div class="footer-block"><div class="marigold-row" style="margin-top: 2rem;">🌸 🌼 🌸 🌼 🌸</div>
 
 <div class="footer">
   Na Ji Na &nbsp;·&nbsp; Koi alliance permanently close nahi hoti, bas "dekhte hain" hoti hai
@@ -1234,5 +1252,6 @@ window.addEventListener('resize', () => {
 });
 </script>
 
+</div>
 </body>
 </html>
